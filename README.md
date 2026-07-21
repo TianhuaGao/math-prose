@@ -181,17 +181,20 @@ The complete taxonomy is available in
 
 The core corpus currently contains:
 
-- **24 influential anchor papers**;
-- **70 localized prose observations**;
+- **32 influential anchors**: 24 research articles and 8 classic or established
+  textbooks;
+- **96 localized prose observations**;
 - **all 31 mathematical behavior codes**;
-- **31 synthesized patterns**, including 12 validated across at least three
-  independent anchors and 19 provisional patterns awaiting broader evidence;
+- **31 synthesized patterns**, including 22 validated across at least three
+  independent anchors and 9 provisional patterns awaiting broader evidence;
 - equal source coverage across pure mathematics, applied mathematics,
   probability and statistics, and optimization and numerical analysis.
 
 The corpus includes source metadata, precise locators, behavior annotations,
 cue phrases, and paraphrased observations. It does **not** redistribute paper
-full text. Famous papers are used as evidence anchors, not as authors to
+or textbook full text. Research articles supply publication-state mathematical
+prose; textbooks supply fuller evidence for definitions, constructions,
+derivations, and proofs. Both are used as evidence anchors, not as authors to
 imitate.
 
 Explore the evidence in
@@ -255,7 +258,8 @@ initialization, and ordered updates. See
 Issues and pull requests are welcome. Corpus contributions should preserve the
 three evidence levels:
 
-1. a source record with stable bibliographic and influence evidence;
+1. a source record with stable bibliographic, genre, access, and influence
+   evidence;
 2. a localized observation with an auditable locator and paraphrased summary;
 3. a synthesized pattern with explicit boundaries and supporting source IDs.
 

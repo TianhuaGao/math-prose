@@ -6,6 +6,7 @@
 - [Three record levels](#three-record-levels)
 - [Annotation axes](#annotation-axes)
 - [Influence gate](#influence-gate)
+- [Source genres](#source-genres)
 - [Core and domain layers](#core-and-domain-layers)
 - [Sampling strategy](#sampling-strategy)
 - [Extraction unit](#extraction-unit)
@@ -17,9 +18,9 @@
 ## Purpose
 
 Build a corpus that teaches agents to choose language from mathematical meaning.
-Do not optimize for rare vocabulary or imitate a single author. Famous papers
-are useful anchors, but fame does not guarantee clear, modern, or transferable
-prose.
+Do not optimize for rare vocabulary or imitate a single author. Influential
+papers and established textbooks are useful anchors, but reputation does not
+guarantee clear, modern, or transferable prose.
 
 ## Influence gate
 
@@ -29,6 +30,9 @@ must satisfy at least one stable criterion:
 - it establishes a landmark theorem, model, or method that shaped later work;
 - it received an official test-of-time or comparable scholarly award;
 - it is a canonical survey, guide, or reference published by a leading venue;
+- it is a classic or durably adopted textbook published by a recognized
+  scholarly press and documented through an official publisher, author, or
+  institutional source;
 - its method became standard practice in an authoritative research software or
   technical community.
 
@@ -44,6 +48,30 @@ equation-prose events that are mathematically sound, intelligible in context,
 and transferable without copying an author's idiosyncrasies. Use
 `source_role: comparison` for a non-anchor source retained only to analyze a
 boundary, counterexample, or historical contrast.
+
+## Source genres
+
+Record `source_genre` for every source. Supported values are
+`research-article`, `textbook`, `research-monograph`, and `survey-or-guide`.
+Genre is an evidence axis, not a domain layer or a Git branch.
+
+Research articles show publication-state compression: they are the primary
+evidence for how mature mathematical arguments are presented under space and
+venue constraints. Textbooks show fuller expository behavior: how definitions
+are motivated, constructions are staged, derivations are narrated, and proof
+dependencies are made visible. Use textbook evidence to enrich these behaviors,
+then compress pedagogical scaffolding when producing research prose.
+
+Do not count several observations from one book as independent support. Pattern
+validation still depends on distinct anchor sources and author groups. When a
+pattern is intended for research manuscripts, prefer support from both article
+and book genres when the behavior appears naturally in both; a textbook-only
+pattern should remain explicit about its expository scope.
+
+Use an official publisher page, an author or institutional copy, or a clearly
+licensed edition. Record the actual access route and reuse terms. A freely
+downloadable file is not necessarily openly licensed, and an official sample
+chapter supports observations only from that sample.
 
 ## Core and domain layers
 
@@ -105,9 +133,9 @@ Keep three types of record in one JSONL file or in three validated JSONL files.
 
 ### Source
 
-Record one paper or book with stable bibliographic metadata, field, venue,
-access route, and reuse status. A source record answers *where the evidence came
-from*.
+Record one paper or book with stable bibliographic metadata, source genre,
+field, venue, access route, and reuse status. A source record answers *where the
+evidence came from*.
 
 ### Observation
 
@@ -218,14 +246,17 @@ Build a stratified corpus of influential anchors rather than a popularity list.
 2. Expand to 24--36 core anchor sources across all four core disciplines only after
    the pilot records can be annotated consistently.
 3. Include multiple author groups, venues, decades, and section roles.
-4. Admit anchor papers through the influence gate, then sample local passages
-   for expository quality and behavioral coverage.
+4. Admit anchor papers and books through the influence gate, then sample local
+   passages for expository quality and behavioral coverage.
 5. Prefer author-owned manuscripts, open-access versions, preprints, and sources
    with clear reuse terms for any stored text.
 6. Oversample underrepresented behaviors rather than collecting more instances
    of easy notation definitions.
 7. Keep theorem/proof prose separate from applied equation exposition during
    analysis, then identify patterns that genuinely transfer.
+8. Track source genre explicitly. Use articles for publication-state phrasing
+   and textbooks for explanatory structure; do not let textbook volume dominate
+   the corpus merely because books contain more examples.
 
 For a stable public pattern, target at least three independent sources and two
 author groups. For a domain-general recommendation, seek evidence from at least
@@ -267,8 +298,8 @@ or tied to one journal's style.
 
 ## Copyright and provenance
 
-- Store full papers outside the public Skill repository unless redistribution
-  is explicitly permitted.
+- Store full papers and books outside the public Skill repository unless
+  redistribution is explicitly permitted.
 - Prefer paraphrased observations and synthetic examples.
 - Keep any verbatim quotation short, attributed, and necessary. Record its word
   count and reuse basis.
@@ -298,11 +329,12 @@ Use `scripts/validate_corpus.py` to check the following records.
 Required fields:
 
 ```json
-{"id":"src-example","record_type":"source","corpus_layer":"core","source_role":"anchor","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"open-access","influence_basis":"Canonical field reference for ...","influence_source":"https://..."}
+{"id":"src-example","record_type":"source","corpus_layer":"core","source_role":"anchor","source_genre":"textbook","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"author-hosted open edition","influence_basis":"Canonical field reference for ...","influence_source":"https://..."}
 ```
 
-Recommended optional fields include `authors`, `venue`, `doi`, `url`,
-`version`, `license`, and `notes`.
+`source_genre` is one of `research-article`, `textbook`,
+`research-monograph`, or `survey-or-guide`. Recommended optional fields include
+`authors`, `venue`, `doi`, `url`, `version`, `license`, and `notes`.
 
 `source_role` is either `anchor` or `comparison`. Anchor records must include
 non-empty `influence_basis` and `influence_source` fields. Comparison records

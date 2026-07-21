@@ -32,6 +32,7 @@ CORE_MIN_OBSERVATIONS = 60
 CORE_MIN_BEHAVIORS = 24
 
 SOURCE_ROLES = {"anchor", "comparison"}
+SOURCE_GENRES = {"research-article", "textbook", "research-monograph", "survey-or-guide"}
 CORPUS_LAYERS = {"core", "domain"}
 
 DISCOURSE_POSITIONS = {
@@ -90,8 +91,8 @@ STATUSES = {"seed", "provisional", "validated"}
 
 REQUIRED = {
     "source": {
-        "id", "record_type", "corpus_layer", "source_role", "title", "year",
-        "discipline", "citation", "access",
+        "id", "record_type", "corpus_layer", "source_role", "source_genre",
+        "title", "year", "discipline", "citation", "access",
     },
     "observation": {
         "id", "record_type", "corpus_layer", "source_id", "behavior",
@@ -194,6 +195,7 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
         if record_type == "source":
             check_enum(record, "corpus_layer", CORPUS_LAYERS, errors)
             check_enum(record, "source_role", SOURCE_ROLES, errors)
+            check_enum(record, "source_genre", SOURCE_GENRES, errors)
             require_non_empty_string(record, "discipline", errors)
             if record.get("corpus_layer") == "core":
                 check_enum(record, "discipline", CORE_DISCIPLINES, errors)
@@ -353,6 +355,10 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         record.get("source_role") for record in records
         if record.get("record_type") == "source" and record.get("source_role")
     )
+    source_genres = Counter(
+        record.get("source_genre") for record in records
+        if record.get("record_type") == "source" and record.get("source_genre")
+    )
     corpus_layers = Counter(
         record.get("corpus_layer") for record in records
         if record.get("corpus_layer")
@@ -373,6 +379,9 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
     source_role_summary = ", ".join(
         f"{key}={value}" for key, value in sorted(source_roles.items())
     ) or "none"
+    source_genre_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(source_genres.items())
+    ) or "none"
     corpus_layer_summary = ", ".join(
         f"{key}={value}" for key, value in sorted(corpus_layers.items())
     ) or "none"
@@ -387,6 +396,7 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         f"behaviors: {behavior_summary}\n"
         f"corpus_layers: {corpus_layer_summary}\n"
         f"source_roles: {source_role_summary}\n"
+        f"source_genres: {source_genre_summary}\n"
         f"disciplines: {discipline_summary}\n"
         f"section_roles: {section_summary}\n"
         f"pattern_statuses: {status_summary}"

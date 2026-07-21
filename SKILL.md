@@ -100,6 +100,10 @@ Follow [references/corpus-method.md](references/corpus-method.md). Store source
 metadata, local observations, and synthesized patterns as distinct records.
 Consult [references/corpora/math-core.jsonl](references/corpora/math-core.jsonl)
 as the transferable evidence base, not as a phrase list to copy mechanically.
+Use `research-article` observations to learn publication-state compression and
+`textbook` observations to learn fuller definition, construction, derivation,
+and proof exposition. Compress textbook scaffolding before producing manuscript
+prose, and do not mistake free access for permission to redistribute source text.
 On a `domain/<field>` branch, load the matching domain corpus only when the task
 belongs to that field. Domain patterns supplement rather than replace the core.
 Run `python3 scripts/validate_corpus.py <core.jsonl> [domain.jsonl]` before

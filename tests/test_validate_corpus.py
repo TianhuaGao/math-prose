@@ -38,6 +38,7 @@ class CorpusValidationTests(unittest.TestCase):
             "record_type": "source",
             "corpus_layer": "core",
             "source_role": "anchor",
+            "source_genre": "textbook",
             "title": "Test",
             "year": 2026,
             "discipline": "pure-mathematics",
@@ -78,6 +79,24 @@ class CorpusValidationTests(unittest.TestCase):
 
         errors = validate_corpus.validate([source, observation, pattern], [])
         self.assertTrue(any("without a matching observation" in error for error in errors))
+
+    def test_source_genre_is_required_and_checked(self) -> None:
+        source = {
+            "_location": "test:1",
+            "id": "src-test",
+            "record_type": "source",
+            "corpus_layer": "core",
+            "source_role": "comparison",
+            "source_genre": "lecture-notes",
+            "title": "Test",
+            "year": 2026,
+            "discipline": "pure-mathematics",
+            "citation": "Test citation",
+            "access": "test fixture",
+        }
+
+        errors = validate_corpus.validate([source], [])
+        self.assertTrue(any("unsupported source_genre" in error for error in errors))
 
 
 if __name__ == "__main__":
