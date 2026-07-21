@@ -1,0 +1,4 @@
+interface:
+  display_name: "Math Writing"
+  short_description: "Write precise, varied mathematical prose"
+  default_prompt: "Use $math-writing to revise this equation-adjacent prose for precision, logical validity, and natural mathematical style."
