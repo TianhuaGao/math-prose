@@ -188,13 +188,13 @@ See the full
 
 The core corpus currently contains:
 
-- **36 influential anchors**: 24 research articles, 10 classic or established
+- **44 influential anchors**: 24 research articles, 18 classic or established
   textbooks, 1 research monograph, and 1 survey or guide;
-- **136 localized, paraphrased prose observations**;
+- **168 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- 9 anchors in each of pure mathematics, applied mathematics, probability and
+- 11 anchors in each of pure mathematics, applied mathematics, probability and
   statistics, and optimization and numerical analysis.
 
 Research articles provide evidence for publication-state compression, while
@@ -224,9 +224,11 @@ influence evidence, and observation locators.
 - A. M. Turing. [*The Chemical Basis of Morphogenesis*](https://royalsocietypublishing.org/doi/10.1098/rstb.1952.0012). Philosophical Transactions of the Royal Society B, 1952. — `research-article`
 - Leonid I. Rudin, Stanley Osher, Emad Fatemi. [*Nonlinear Total Variation Based Noise Removal Algorithms*](https://doi.org/10.1016/0167-2789(92)90242-F). Physica D, 1992. — `research-article`
 - Michael G. Crandall, Hitoshi Ishii, Pierre-Louis Lions. [*User's Guide to Viscosity Solutions of Second Order Partial Differential Equations*](https://arxiv.org/abs/math/9207212). Bulletin of the American Mathematical Society, 1992. — `research-article`
+- Peter J. Olver. [*Applications of Lie Groups to Differential Equations*](https://link.springer.com/book/10.1007/978-1-4612-4350-2). Springer, 1993. — `textbook`
 - Richard Jordan, David Kinderlehrer, Felix Otto. [*The Variational Formulation of the Fokker–Planck Equation*](https://doi.org/10.1137/S0036141096303359). SIAM Journal on Mathematical Analysis, 1998. — `research-article`
 - David J. C. MacKay. [*Information Theory, Inference, and Learning Algorithms*](https://www.inference.org.uk/mackay/itila/book.html). Cambridge University Press, 2003. — `textbook`
 - Emmanuel J. Candès, Justin Romberg, Terence Tao. [*Robust Uncertainty Principles: Exact Signal Reconstruction from Highly Incomplete Frequency Information*](https://arxiv.org/abs/math/0409186). IEEE Transactions on Information Theory, 2006. — `research-article`
+- Lawrence C. Evans. [*Partial Differential Equations*](https://bookstore.ams.org/gsm-19-r). American Mathematical Society, 2010. — `textbook`
 - Gerald Teschl. [*Ordinary Differential Equations and Dynamical Systems*](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/index.html). American Mathematical Society, 2012. — `textbook`
 - NIST Digital Library of Mathematical Functions Editorial Board. [*NIST Digital Library of Mathematical Functions*](https://dlmf.nist.gov/). National Institute of Standards and Technology, 2026. — `survey-or-guide`
 
@@ -237,10 +239,12 @@ influence evidence, and observation locators.
 - Lloyd N. Trefethen, David Bau III. [*Numerical Linear Algebra*](https://people.maths.ox.ac.uk/trefethen/text.html). Society for Industrial and Applied Mathematics, 1997. — `textbook`
 - Nicholas J. Higham. [*Accuracy and Stability of Numerical Algorithms*](https://nhigham.com/accuracy-and-stability-of-numerical-algorithms/). Society for Industrial and Applied Mathematics, 2002. — `research-monograph`
 - Stephen Boyd, Lieven Vandenberghe. [*Convex Optimization*](https://web.stanford.edu/~boyd/cvxbook/). Cambridge University Press, 2004. — `textbook`
+- Jorge Nocedal, Stephen J. Wright. [*Numerical Optimization*](https://link.springer.com/book/10.1007/978-0-387-40065-5). Springer, 2006. — `textbook`
 - Amir Beck, Marc Teboulle. [*A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems*](https://doi.org/10.1137/080716542). SIAM Journal on Imaging Sciences, 2009. — `research-article`
 - Antonin Chambolle, Thomas Pock. [*A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging*](https://optimization-online.org/2010/06/2646/). Journal of Mathematical Imaging and Vision, 2011. — `research-article`
 - John Duchi, Elad Hazan, Yoram Singer. [*Adaptive Subgradient Methods for Online Learning and Stochastic Optimization*](https://www.jmlr.org/papers/v12/duchi11a.html). Journal of Machine Learning Research, 2011. — `research-article`
 - Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein. [*Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers*](https://stanford.edu/~boyd/papers/admm_distr_stats.html). Foundations and Trends in Machine Learning, 2011. — `research-article`
+- Dimitri P. Bertsekas. [*Nonlinear Programming*](https://www.athenasc.com/nonlinbook.html). Athena Scientific, 2016. — `textbook`
 
 ### Probability and Statistics
 
@@ -251,8 +255,10 @@ influence evidence, and observation locators.
 - Bradley Efron. [*Bootstrap Methods: Another Look at the Jackknife*](https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full). Annals of Statistics, 1979. — `research-article`
 - David Williams. [*Probability with Martingales*](https://www.cambridge.org/highereducation/books/probability-with-martingales/B4CFCE0D08930FB46C6E93E775503926). Cambridge University Press, 1991. — `textbook`
 - Charles M. Grinstead, J. Laurie Snell. [*Introduction to Probability*](https://math.dartmouth.edu/~prob/prob/prob.pdf). American Mathematical Society, 1997. — `textbook`
+- Patrick Billingsley. [*Probability and Measure*](https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/statistics-16st/probability-mathematical-statistics-16st1/probability-and-measure-978-1-118-12237-2). John Wiley & Sons, 2012. — `textbook`
 - Matthew D. Hoffman, Andrew Gelman. [*The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo*](https://jmlr.org/papers/v15/hoffman14a.html). Journal of Machine Learning Research, 2014. — `research-article`
 - David A. Levin, Yuval Peres, Elizabeth L. Wilmer. [*Markov Chains and Mixing Times*](https://pages.uoregon.edu/dlevin/MARKOV/). American Mathematical Society, 2017. — `textbook`
+- Rick Durrett. [*Probability: Theory and Examples*](https://www.cambridge.org/core/books/probability/DD9A1907F810BB14CCFF022CDFC5677A). Cambridge University Press, 2019. — `textbook`
 
 ### Pure Mathematics
 
@@ -262,7 +268,9 @@ influence evidence, and observation locators.
 - Allen Hatcher. [*Algebraic Topology*](https://pi.math.cornell.edu/~hatcher/AT/ATpage.html). Cambridge University Press, 2002. — `textbook`
 - Grisha Perelman. [*The Entropy Formula for the Ricci Flow and Its Geometric Applications*](https://arxiv.org/abs/math/0211159). arXiv, 2002. — `research-article`
 - Manindra Agrawal, Neeraj Kayal, Nitin Saxena. [*PRIMES Is in P*](https://annals.math.princeton.edu/2004/160-2/p12). Annals of Mathematics, 2004. — `research-article`
+- Terence Tao. [*Analysis I*](https://terrytao.wordpress.com/books/analysis-i/). Hindustan Book Agency, 2006. — `textbook`
 - Ben Green, Terence Tao. [*The Primes Contain Arbitrarily Long Arithmetic Progressions*](https://annals.math.princeton.edu/2008/167-2/p03). Annals of Mathematics, 2008. — `research-article`
+- Paolo Aluffi. [*Algebra: Chapter 0*](https://bookstore.ams.org/gsm-104/). American Mathematical Society, 2009. — `textbook`
 - John M. Lee. [*Introduction to Smooth Manifolds*](https://sites.math.washington.edu/~lee/Books/ISM/). Springer, 2013. — `textbook`
 - Sheldon Axler. [*Linear Algebra Done Right*](https://linear.axler.net/index.html). Springer, 2024. — `textbook`
 

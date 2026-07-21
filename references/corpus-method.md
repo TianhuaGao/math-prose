@@ -243,8 +243,11 @@ Build a stratified corpus of influential anchors rather than a popularity list.
 
 1. Run a 6--8 source pilot across the four core disciplines to test the
    schema, annotation boundaries, and validator before scaling collection.
-2. Expand to 24--36 core anchor sources across all four core disciplines only after
-   the pilot records can be annotated consistently.
+2. Expand initially to 24--36 core anchor sources across all four core
+   disciplines only after the pilot records can be annotated consistently.
+   Treat 24 as the readiness floor; growth beyond 36 should fill documented
+   behavior, formula-form, genre, or disciplinary gaps rather than increase
+   volume alone.
 3. Include multiple author groups, venues, decades, and section roles.
 4. Admit anchor papers and books through the influence gate, then sample local
    passages for expository quality and behavioral coverage.
