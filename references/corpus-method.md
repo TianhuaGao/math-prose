@@ -5,6 +5,8 @@
 - [Purpose](#purpose)
 - [Three record levels](#three-record-levels)
 - [Annotation axes](#annotation-axes)
+- [Influence gate](#influence-gate)
+- [Core and domain layers](#core-and-domain-layers)
 - [Sampling strategy](#sampling-strategy)
 - [Extraction unit](#extraction-unit)
 - [Pattern synthesis](#pattern-synthesis)
@@ -18,6 +20,84 @@ Build a corpus that teaches agents to choose language from mathematical meaning.
 Do not optimize for rare vocabulary or imitate a single author. Famous papers
 are useful anchors, but fame does not guarantee clear, modern, or transferable
 prose.
+
+## Influence gate
+
+Use influential, field-recognized works as the anchor corpus. An anchor source
+must satisfy at least one stable criterion:
+
+- it establishes a landmark theorem, model, or method that shaped later work;
+- it received an official test-of-time or comparable scholarly award;
+- it is a canonical survey, guide, or reference published by a leading venue;
+- its method became standard practice in an authoritative research software or
+  technical community.
+
+For every anchor, record a concise `influence_basis` and an authoritative
+`influence_source`. Prefer official award pages, publisher pages, author or
+institutional publication records, and authoritative technical documentation.
+Do not use a volatile citation count as the sole admission criterion. Citation
+counts may support an audit when dated and sourced, but they do not replace a
+stable account of the paper's field-level role.
+
+Influence is an admission gate, not a style endorsement. Annotate only local
+equation-prose events that are mathematically sound, intelligible in context,
+and transferable without copying an author's idiosyncrasies. Use
+`source_role: comparison` for a non-anchor source retained only to analyze a
+boundary, counterexample, or historical contrast.
+
+## Core and domain layers
+
+Treat Git `main` as the transferable mathematical-prose base. It contains
+`references/corpora/math-core.jsonl` and only sources whose prose teaches a
+general mathematical behavior across fields. Use these core disciplines:
+
+- `pure-mathematics`;
+- `applied-mathematics`;
+- `probability-statistics`;
+- `optimization-numerical-analysis`.
+
+Create a domain branch only from a reviewed core baseline. Name it
+`domain/<field>`. A domain branch retains the
+entire core corpus and adds `references/corpora/<field>.jsonl`. Domain records
+use `corpus_layer: domain` and a stable `domain` label. Core records use
+`corpus_layer: core` and do not set `domain`.
+
+Keep core corrections on `main`, then merge or rebase them into active domain
+branches. Do not merge domain-only sources or patterns back into `main` merely
+because they are useful in one specialty. A domain pattern may cite both core
+and domain sources, but its validation evidence must include at least three
+independent anchors from that domain. A core pattern must not depend on a
+domain source.
+
+Validate a core corpus alone:
+
+```bash
+python3 scripts/validate_corpus.py references/corpora/math-core.jsonl
+```
+
+Validate a domain overlay together with its inherited base:
+
+```bash
+python3 scripts/validate_corpus.py \
+  references/corpora/math-core.jsonl \
+  references/corpora/example-field.jsonl
+```
+
+Do not create the first domain branch until the mathematical base has at least
+24 influential anchors, 60 reviewed observations, 24 distinct behavior codes,
+all four core disciplines, and successful blind tests spanning definitions,
+derivations, proof claims, and optimization or computation.
+
+Enforce the machine-verifiable portion of this gate with:
+
+```bash
+python3 scripts/validate_corpus.py --require-core-ready \
+  references/corpora/math-core.jsonl
+```
+
+Record the separate forward-writing checks in
+[core-evaluation.md](core-evaluation.md). A count-based pass does not replace
+these tests.
 
 ## Three record levels
 
@@ -118,27 +198,33 @@ Use one of:
 
 ### Discipline
 
-Use a broad top-level label and an optional subfield:
+For core records, use one of the four broad labels and add an optional
+`subfield`:
 
 - `pure-mathematics`
 - `applied-mathematics`
 - `probability-statistics`
-- `optimization-machine-learning`
-- `control-robotics`
-- `physics-engineering`
+- `optimization-numerical-analysis`
+
+Domain overlays may use a stable domain-specific discipline label, but must
+also carry `corpus_layer: domain` and a non-empty `domain` field.
 
 ## Sampling strategy
 
-Build a stratified corpus rather than a popularity list.
+Build a stratified corpus of influential anchors rather than a popularity list.
 
-1. Start with 24--36 anchor sources across at least four disciplines.
-2. Include multiple author groups, venues, decades, and section roles.
-3. Sample both highly cited papers and papers selected for expository quality.
-4. Prefer author-owned manuscripts, open-access versions, preprints, and sources
+1. Run a 6--8 source pilot across the four core disciplines to test the
+   schema, annotation boundaries, and validator before scaling collection.
+2. Expand to 24--36 core anchor sources across all four core disciplines only after
+   the pilot records can be annotated consistently.
+3. Include multiple author groups, venues, decades, and section roles.
+4. Admit anchor papers through the influence gate, then sample local passages
+   for expository quality and behavioral coverage.
+5. Prefer author-owned manuscripts, open-access versions, preprints, and sources
    with clear reuse terms for any stored text.
-5. Oversample underrepresented behaviors rather than collecting more instances
+6. Oversample underrepresented behaviors rather than collecting more instances
    of easy notation definitions.
-6. Keep theorem/proof prose separate from applied equation exposition during
+7. Keep theorem/proof prose separate from applied equation exposition during
    analysis, then identify patterns that genuinely transfer.
 
 For a stable public pattern, target at least three independent sources and two
@@ -194,11 +280,11 @@ or tied to one journal's style.
 ## Quality states
 
 - `seed`: expert-proposed behavior or construction not yet corpus-supported.
-- `provisional`: supported by one or two independent sources or still narrow in
-  discipline and context.
-- `validated`: supported by at least three independent sources, reviewed for
-  mathematical meaning, and checked against counterexamples. Domain-general
-  patterns should also span at least two disciplines.
+- `provisional`: supported by one or two independent anchor sources or still
+  narrow in discipline and context.
+- `validated`: supported by at least three independent anchor sources,
+  reviewed for mathematical meaning, and checked against counterexamples.
+  Domain-general patterns should also span at least two disciplines.
 
 Validation means the annotation and synthesis passed review. It does not mean
 the phrase is mandatory or universally optimal.
@@ -212,18 +298,26 @@ Use `scripts/validate_corpus.py` to check the following records.
 Required fields:
 
 ```json
-{"id":"src-example","record_type":"source","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"open-access"}
+{"id":"src-example","record_type":"source","corpus_layer":"core","source_role":"anchor","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"open-access","influence_basis":"Canonical field reference for ...","influence_source":"https://..."}
 ```
 
 Recommended optional fields include `authors`, `venue`, `doi`, `url`,
 `version`, `license`, and `notes`.
+
+`source_role` is either `anchor` or `comparison`. Anchor records must include
+non-empty `influence_basis` and `influence_source` fields. Comparison records
+may include them, but they are not treated as evidence that a pattern has been
+tested against influential literature.
+
+`corpus_layer` is either `core` or `domain`. Domain sources must also include a
+non-empty `domain` field.
 
 ### Observation record
 
 Required fields:
 
 ```json
-{"id":"obs-example","record_type":"observation","source_id":"src-example","behavior":"C1","discourse_position":"derivation-step","formula_form":"equality-or-identity","claim_strength":"exact-algebraic","section_role":"derivation-or-analysis","locator":"Sec. 3, Eq. (7)","cue":"substituting ... gives","summary":"A paraphrase of the mathematical action.","quote_words":0}
+{"id":"obs-example","record_type":"observation","corpus_layer":"core","source_id":"src-example","behavior":"C1","discourse_position":"derivation-step","formula_form":"equality-or-identity","claim_strength":"exact-algebraic","section_role":"derivation-or-analysis","locator":"Sec. 3, Eq. (7)","cue":"substituting ... gives","summary":"A paraphrase of the mathematical action.","quote_words":0}
 ```
 
 Use optional `quote` only when redistribution is justified. The validator limits
@@ -234,5 +328,5 @@ it to 25 words but cannot decide whether reuse is legally permitted.
 Required fields:
 
 ```json
-{"id":"pat-example","record_type":"pattern","behavior":"C1","intent":"Introduce the result of a valid substitution.","constructions":["substituting ... into ... gives"],"boundaries":["Name the substituted relation and preserve its conditions."],"synthetic_example":"Substituting the feedback law into the dynamics gives the closed-loop system.","source_ids":["src-example"],"status":"provisional"}
+{"id":"pat-example","record_type":"pattern","corpus_layer":"core","behavior":"C1","intent":"Introduce the result of a valid substitution.","constructions":["substituting ... into ... gives"],"boundaries":["Name the substituted relation and preserve its conditions."],"synthetic_example":"Substituting the stated relation into the governing equation gives the reduced form.","source_ids":["src-example"],"status":"provisional"}
 ```

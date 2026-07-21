@@ -98,8 +98,14 @@ errors.
 
 Follow [references/corpus-method.md](references/corpus-method.md). Store source
 metadata, local observations, and synthesized patterns as distinct records.
-Run `python3 scripts/validate_corpus.py <corpus.jsonl>` before accepting corpus
-changes. Keep copyrighted source text out of the public corpus by default.
+Consult [references/corpora/math-core.jsonl](references/corpora/math-core.jsonl)
+as the transferable evidence base, not as a phrase list to copy mechanically.
+On a `domain/<field>` branch, load the matching domain corpus only when the task
+belongs to that field. Domain patterns supplement rather than replace the core.
+Run `python3 scripts/validate_corpus.py <core.jsonl> [domain.jsonl]` before
+accepting corpus changes. Keep copyrighted source text out of the public corpus
+by default. Use [references/core-evaluation.md](references/core-evaluation.md)
+as the forward-test protocol when core patterns or the writing workflow change.
 
 ## Output
 
