@@ -4,6 +4,15 @@ Use equation placement to control emphasis and reduce mechanical definition
 sequences. Each display should have a reason to appear and a clear connection to
 the surrounding argument.
 
+## Contents
+
+- [Before a display](#before-a-display)
+- [After a display](#after-a-display)
+- [Common architectures](#common-architectures)
+- [Local variation and intentional parallelism](#local-variation-and-intentional-parallelism)
+- [Paragraph rhythm](#paragraph-rhythm)
+- [Anti-patterns](#anti-patterns)
+
 ## Before a display
 
 Use the lead sentence to do one of four jobs:
@@ -134,6 +143,45 @@ Use a strength-matched interpretation:
 - a simulation `indicates` an observed trend;
 - a theorem `establishes` its stated conclusion under its hypotheses.
 
+## Local variation and intentional parallelism
+
+Before finalizing a paragraph, compare its sentence frames with the neighboring
+equation-introduction units. Inspect the subject role, predicate, complement,
+and equation position as a complete frame rather than counting repeated words
+alone.
+
+Use the repetition deliberately:
+
+1. If matched wording exposes a genuine mathematical correspondence, retain
+   the parallel structure.
+2. If nearby sentences perform different mathematical behaviors, give each a
+   construction licensed by its own behavior.
+3. If they perform the same behavior but the repetition adds no structure,
+   revise one by changing the information order, grammatical subject, equation
+   placement, or grouping.
+4. If no equally precise alternative exists, retain the repeated wording.
+
+Do not select a backup phrase merely because it is different. In particular,
+do not replace a stable technical term, change a definition into an
+interpretation, or strengthen a descriptive relation to an inference.
+
+For example, avoid applying the same repair template to two adjacent tuple
+introductions. A locally varied version may read:
+
+> Together, $p$ and $v$ form the measured-state tuple
+> \[
+> s=(p,v).
+> \]
+> Define the corresponding reference tuple by
+> \[
+> s_r=(p_r,v_r,a_r).
+> \]
+
+The first sentence assembles already identified measurements, whereas the
+second stipulates the reference tuple. By contrast, matched frames may be
+preferable when introducing two inverse maps or stating genuinely symmetric
+assumptions.
+
 ## Paragraph rhythm
 
 A mathematical paragraph often follows this sequence:
@@ -154,6 +202,9 @@ compressing for a venue limit.
 - a `where` sentence that defines only physical meaning but omits type or space;
 - repeated `is` sentences that actually mix naming, construction, inference,
   and interpretation;
+- the same repair template applied twice in a local block without checking
+  whether the mathematics is intentionally parallel;
+- forced synonym changes that obscure a stable definition or technical term;
 - `equivalently` between one-way implications;
 - an after-equation sentence that overclaims what the equation proves;
 - several single-sentence paragraphs created only to vary sentence openings;

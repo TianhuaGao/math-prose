@@ -35,6 +35,24 @@ approximation, optimization, initialization, and update language. In particular,
 they rejected the unsupported global-stability claim and retained the
 second-order remainder before presenting the first-order approximation.
 
+## Local repetition regression cases
+
+The following cases were added after a real revision exposed the same repair
+template in adjacent equation introductions. They were manually reviewed in the
+same editing session, so they are regression checks rather than new independent-
+agent evidence.
+
+| Case | Input condition | Required behavior | Review |
+|---|---|---|---|
+| Unintended duplicate frame | Two nearby tuple introductions both use `collects ... in the ordered tuple` | Distinguish assembly of known measurements from stipulative definition by changing information structure, not by rotating synonyms | PASS (manual) |
+| Intentional parallelism | Two inverse maps or symmetric assumptions use matched sentence frames | Retain the parallel form when it makes the mathematical correspondence easier to see | PASS (manual) |
+| Precision fallback | Repeated wording carries a stable property or technical term and no equally precise alternative is available | Keep the wording or group the statements; do not introduce a vague substitute solely for variety | PASS (manual) |
+
+Repeat these checks whenever the revision workflow or equation-discourse rules
+change. A successful revision must detect the local frame repetition, explain
+whether it is functional, and preserve the mathematical behavior and claim
+strength of every changed sentence.
+
 ## Readiness decision
 
 The core passes the current forward-test gate for definitions, derivations,

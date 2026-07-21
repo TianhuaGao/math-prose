@@ -33,7 +33,14 @@ not synonym rotation.
 6. **Revise structure before vocabulary.** Group compatible definitions,
    change equation-to-prose order, or split overloaded sentences before
    replacing repeated predicates.
-7. **Audit the result.** Verify first-use definitions, type declarations,
+7. **Run a local repetition gate.** Compare sentence frames in the current
+   paragraph and neighboring equation-introduction units. Keep a repeated frame
+   only when deliberate parallelism clarifies parallel mathematics. Otherwise,
+   revise one occurrence by changing its discourse function, information order,
+   equation placement, or sentence structure. Do not rotate synonyms, vary
+   stable technical terms, or weaken precision merely to sound different. If no
+   equally precise alternative exists, retain the repetition.
+8. **Audit the result.** Verify first-use definitions, type declarations,
    denotation direction, equivalence, assumptions, edge cases, and preserved
    mathematics. Confirm that every stronger verb is justified by the visible
    argument or cited result.
