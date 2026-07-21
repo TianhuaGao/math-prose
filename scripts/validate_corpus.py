@@ -29,6 +29,8 @@ DISCIPLINES = {
     "physics-engineering",
 }
 
+SOURCE_ROLES = {"anchor", "comparison"}
+
 DISCOURSE_POSITIONS = {
     "before-display",
     "display-lead",
@@ -84,7 +86,10 @@ SECTION_ROLES = {
 STATUSES = {"seed", "provisional", "validated"}
 
 REQUIRED = {
-    "source": {"id", "record_type", "title", "year", "discipline", "citation", "access"},
+    "source": {
+        "id", "record_type", "source_role", "title", "year", "discipline",
+        "citation", "access",
+    },
     "observation": {
         "id", "record_type", "source_id", "behavior", "discourse_position",
         "formula_form", "claim_strength", "section_role", "locator", "cue",
@@ -128,6 +133,12 @@ def require_string_list(record: dict[str, Any], field: str, errors: list[str]) -
         errors.append(f"line {record['_line']}: {field} must be a list of non-empty strings")
 
 
+def require_non_empty_string(record: dict[str, Any], field: str, errors: list[str]) -> None:
+    value = record.get(field)
+    if not isinstance(value, str) or not value.strip():
+        errors.append(f"line {record['_line']}: {field} must be a non-empty string")
+
+
 def check_enum(record: dict[str, Any], field: str, allowed: set[str], errors: list[str]) -> None:
     if record.get(field) not in allowed:
         errors.append(
@@ -166,10 +177,14 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
         if record_type not in REQUIRED:
             continue
         if record_type == "source":
+            check_enum(record, "source_role", SOURCE_ROLES, errors)
             check_enum(record, "discipline", DISCIPLINES, errors)
             year = record.get("year")
             if not isinstance(year, int) or year < 1500 or year > 2100:
                 errors.append(f"line {record['_line']}: year must be an integer from 1500 to 2100")
+            if record.get("source_role") == "anchor":
+                require_non_empty_string(record, "influence_basis", errors)
+                require_non_empty_string(record, "influence_source", errors)
 
         elif record_type == "observation":
             check_enum(record, "behavior", BEHAVIORS, errors)
@@ -203,12 +218,18 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
                 unknown = sorted(source_id for source_id in source_ids if source_id not in sources)
                 if unknown:
                     errors.append(f"line {record['_line']}: unknown source_ids: {', '.join(unknown)}")
-                if record.get("status") == "validated" and len(set(source_ids)) < 3:
+                anchor_source_ids = {
+                    source_id for source_id in source_ids
+                    if source_id in sources and sources[source_id].get("source_role") == "anchor"
+                }
+                if record.get("status") == "validated" and len(anchor_source_ids) < 3:
                     errors.append(
-                        f"line {record['_line']}: validated patterns require at least three independent sources"
+                        f"line {record['_line']}: validated patterns require at least three independent anchor sources"
                     )
-                if record.get("status") == "provisional" and not source_ids:
-                    errors.append(f"line {record['_line']}: provisional patterns require at least one source")
+                if record.get("status") == "provisional" and not anchor_source_ids:
+                    errors.append(
+                        f"line {record['_line']}: provisional patterns require at least one anchor source"
+                    )
 
     return errors
 
@@ -217,9 +238,44 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
     records = list(records)
     types = Counter(record.get("record_type", "unknown") for record in records)
     behaviors = Counter(record.get("behavior") for record in records if record.get("behavior"))
+    disciplines = Counter(
+        record.get("discipline") for record in records
+        if record.get("record_type") == "source" and record.get("discipline")
+    )
+    source_roles = Counter(
+        record.get("source_role") for record in records
+        if record.get("record_type") == "source" and record.get("source_role")
+    )
+    section_roles = Counter(
+        record.get("section_role") for record in records
+        if record.get("record_type") == "observation" and record.get("section_role")
+    )
+    statuses = Counter(
+        record.get("status") for record in records
+        if record.get("record_type") == "pattern" and record.get("status")
+    )
     type_summary = ", ".join(f"{key}={value}" for key, value in sorted(types.items())) or "none"
     behavior_summary = ", ".join(f"{key}={value}" for key, value in sorted(behaviors.items())) or "none"
-    return f"records: {type_summary}\nbehaviors: {behavior_summary}"
+    discipline_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(disciplines.items())
+    ) or "none"
+    source_role_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(source_roles.items())
+    ) or "none"
+    section_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(section_roles.items())
+    ) or "none"
+    status_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(statuses.items())
+    ) or "none"
+    return (
+        f"records: {type_summary}\n"
+        f"behaviors: {behavior_summary}\n"
+        f"source_roles: {source_role_summary}\n"
+        f"disciplines: {discipline_summary}\n"
+        f"section_roles: {section_summary}\n"
+        f"pattern_statuses: {status_summary}"
+    )
 
 
 def main() -> int:

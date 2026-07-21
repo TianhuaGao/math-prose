@@ -5,6 +5,7 @@
 - [Purpose](#purpose)
 - [Three record levels](#three-record-levels)
 - [Annotation axes](#annotation-axes)
+- [Influence gate](#influence-gate)
 - [Sampling strategy](#sampling-strategy)
 - [Extraction unit](#extraction-unit)
 - [Pattern synthesis](#pattern-synthesis)
@@ -18,6 +19,30 @@ Build a corpus that teaches agents to choose language from mathematical meaning.
 Do not optimize for rare vocabulary or imitate a single author. Famous papers
 are useful anchors, but fame does not guarantee clear, modern, or transferable
 prose.
+
+## Influence gate
+
+Use influential, field-recognized works as the anchor corpus. An anchor source
+must satisfy at least one stable criterion:
+
+- it establishes a landmark theorem, model, or method that shaped later work;
+- it received an official test-of-time or comparable scholarly award;
+- it is a canonical survey, guide, or reference published by a leading venue;
+- its method became standard practice in an authoritative research software or
+  technical community.
+
+For every anchor, record a concise `influence_basis` and an authoritative
+`influence_source`. Prefer official award pages, publisher pages, author or
+institutional publication records, and authoritative technical documentation.
+Do not use a volatile citation count as the sole admission criterion. Citation
+counts may support an audit when dated and sourced, but they do not replace a
+stable account of the paper's field-level role.
+
+Influence is an admission gate, not a style endorsement. Annotate only local
+equation-prose events that are mathematically sound, intelligible in context,
+and transferable without copying an author's idiosyncrasies. Use
+`source_role: comparison` for a non-anchor source retained only to analyze a
+boundary, counterexample, or historical contrast.
 
 ## Three record levels
 
@@ -129,16 +154,20 @@ Use a broad top-level label and an optional subfield:
 
 ## Sampling strategy
 
-Build a stratified corpus rather than a popularity list.
+Build a stratified corpus of influential anchors rather than a popularity list.
 
-1. Start with 24--36 anchor sources across at least four disciplines.
-2. Include multiple author groups, venues, decades, and section roles.
-3. Sample both highly cited papers and papers selected for expository quality.
-4. Prefer author-owned manuscripts, open-access versions, preprints, and sources
+1. Run a 6--8 source pilot across the six top-level disciplines to test the
+   schema, annotation boundaries, and validator before scaling collection.
+2. Expand to 24--36 anchor sources across at least four disciplines only after
+   the pilot records can be annotated consistently.
+3. Include multiple author groups, venues, decades, and section roles.
+4. Admit anchor papers through the influence gate, then sample local passages
+   for expository quality and behavioral coverage.
+5. Prefer author-owned manuscripts, open-access versions, preprints, and sources
    with clear reuse terms for any stored text.
-5. Oversample underrepresented behaviors rather than collecting more instances
+6. Oversample underrepresented behaviors rather than collecting more instances
    of easy notation definitions.
-6. Keep theorem/proof prose separate from applied equation exposition during
+7. Keep theorem/proof prose separate from applied equation exposition during
    analysis, then identify patterns that genuinely transfer.
 
 For a stable public pattern, target at least three independent sources and two
@@ -194,11 +223,11 @@ or tied to one journal's style.
 ## Quality states
 
 - `seed`: expert-proposed behavior or construction not yet corpus-supported.
-- `provisional`: supported by one or two independent sources or still narrow in
-  discipline and context.
-- `validated`: supported by at least three independent sources, reviewed for
-  mathematical meaning, and checked against counterexamples. Domain-general
-  patterns should also span at least two disciplines.
+- `provisional`: supported by one or two independent anchor sources or still
+  narrow in discipline and context.
+- `validated`: supported by at least three independent anchor sources,
+  reviewed for mathematical meaning, and checked against counterexamples.
+  Domain-general patterns should also span at least two disciplines.
 
 Validation means the annotation and synthesis passed review. It does not mean
 the phrase is mandatory or universally optimal.
@@ -212,11 +241,16 @@ Use `scripts/validate_corpus.py` to check the following records.
 Required fields:
 
 ```json
-{"id":"src-example","record_type":"source","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"open-access"}
+{"id":"src-example","record_type":"source","source_role":"anchor","title":"...","year":2026,"discipline":"applied-mathematics","citation":"...","access":"open-access","influence_basis":"Canonical field reference for ...","influence_source":"https://..."}
 ```
 
 Recommended optional fields include `authors`, `venue`, `doi`, `url`,
 `version`, `license`, and `notes`.
+
+`source_role` is either `anchor` or `comparison`. Anchor records must include
+non-empty `influence_basis` and `influence_source` fields. Comparison records
+may include them, but they are not treated as evidence that a pattern has been
+tested against influential literature.
 
 ### Observation record
 

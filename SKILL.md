@@ -98,6 +98,9 @@ errors.
 
 Follow [references/corpus-method.md](references/corpus-method.md). Store source
 metadata, local observations, and synthesized patterns as distinct records.
+Consult [references/pilot-corpus.jsonl](references/pilot-corpus.jsonl) as an
+evidence registry, not as a phrase list to copy mechanically. Its patterns
+remain provisional until independent review and broader sampling are complete.
 Run `python3 scripts/validate_corpus.py <corpus.jsonl>` before accepting corpus
 changes. Keep copyrighted source text out of the public corpus by default.
 
