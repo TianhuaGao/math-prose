@@ -183,10 +183,10 @@ The core corpus currently contains:
 
 - **32 influential anchors**: 24 research articles and 8 classic or established
   textbooks;
-- **96 localized prose observations**;
+- **112 localized prose observations**;
 - **all 31 mathematical behavior codes**;
-- **31 synthesized patterns**, including 22 validated across at least three
-  independent anchors and 9 provisional patterns awaiting broader evidence;
+- **31 synthesized patterns**, all validated across at least three independent
+  anchors and at least two core disciplines;
 - equal source coverage across pure mathematics, applied mathematics,
   probability and statistics, and optimization and numerical analysis.
 

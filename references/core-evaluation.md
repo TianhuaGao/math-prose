@@ -60,3 +60,12 @@ proof claims, optimization, and computation. This is a targeted functional
 check, not evidence that every mathematical subfield or house style has been
 exhausted. Repeat the evaluation when the taxonomy, core patterns, or writing
 workflow changes materially.
+
+On 2026-07-21, 16 further observations were checked against five existing
+anchors and added without changing any recommended construction, boundary, or
+workflow rule. The added evidence completed independent, cross-disciplinary
+support for the nine previously provisional patterns and introduced explicit
+coverage of piecewise displays, an additional `where`-clause role, and a proof
+calculation step. Structural validation and the existing validator unit tests
+were rerun; this evidence update is not counted as a new independent-agent
+forward test.
