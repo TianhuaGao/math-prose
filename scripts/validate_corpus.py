@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate a math-writing JSONL corpus using only the Python standard library."""
+"""Validate a Math Prose JSONL corpus using only the Python standard library."""
 
 from __future__ import annotations
 

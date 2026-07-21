@@ -1,9 +1,9 @@
 ---
-name: math-writing
-description: Draft, revise, and audit precise English mathematical prose for research papers, theses, technical reports, and proofs. Use when writing or improving notation definitions, equation-adjacent prose, derivations, assumptions, mappings, constructions, inequalities, optimization problems, dynamical systems, theorem statements, proofs, or mathematical interpretations, especially when prose is repetitive, overuses forms of "be," confuses define/denote/given by, or uses inference verbs without sufficient logical support.
+name: math-prose
+description: Draft, revise, and audit precise English mathematical prose for research papers, theses, technical reports, and proofs while preserving supplied formulas, notation, assumptions, and claim strength by default. Use when writing or improving notation definitions, equation-adjacent prose, derivations, assumptions, mappings, constructions, inequalities, optimization problems, dynamical systems, theorem statements, proofs, or mathematical interpretations, especially when prose is repetitive, overuses forms of "be," confuses define/denote/given by, or uses inference verbs without sufficient logical support.
 ---
 
-# Math Writing
+# Math Prose
 
 Write mathematical prose by matching language to the mathematical action being
 performed. Improve variety through semantic accuracy and information structure,
