@@ -2,19 +2,23 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Evidence-informed mathematical writing for Codex.**
+**Evidence-informed mathematical writing for AI agents.**
 
-Math Prose is an open Codex skill for drafting, revising, and auditing English
-mathematical prose without silently changing the mathematics. It helps an agent
-choose language from the mathematical action being performed, rather than from
-a list of interchangeable synonyms.
+Math Prose is an open Agent Skill for drafting, revising, and auditing English
+mathematical prose without silently changing the mathematics. It helps an AI
+agent choose language from the mathematical action being performed, rather
+than from a list of interchangeable synonyms.
 
 Use it for research papers, theses, technical reports, proofs, derivations,
 optimization problems, dynamical systems, notation blocks, and prose around
 displayed equations.
 
-It is designed for Codex surfaces that support skills, including the CLI, IDE
-extension, and ChatGPT desktop app.
+The repository follows the open
+[Agent Skills specification](https://agentskills.io/specification): a portable
+`SKILL.md` entry point with supporting references and scripts. Any
+skills-compatible agent can load it. An agent without native skill discovery
+can still use the same instructions by reading `SKILL.md` and resolving its
+linked resources relative to the repository root.
 
 ## Why Math Prose?
 
@@ -85,25 +89,16 @@ only on a neighborhood does not by itself establish global exponential
 stability. The skill preserves the local scope and reports the missing
 hypotheses.
 
-## Installation
+## Install
 
-### With the Codex skill installer
+### Skills-compatible agents
 
-In Codex, invoke the built-in installer and ask it to install this repository:
+Install this repository with the skill installer or registry provided by your
+agent client. Installation commands and user-level skill directories vary by
+client, so consult that client's documentation for the exact location.
 
-```text
-$skill-installer Install the skill from https://github.com/TianhuaGao/math-prose.
-```
-
-### Manual user-level installation
-
-```bash
-mkdir -p "$HOME/.agents/skills"
-git clone https://github.com/TianhuaGao/math-prose.git \
-  "$HOME/.agents/skills/math-prose"
-```
-
-For a repository-scoped installation, clone it under that repository instead:
+If your client scans the common project-level `.agents/skills` directory, add
+Math Prose to a project with:
 
 ```bash
 mkdir -p .agents/skills
@@ -111,35 +106,49 @@ git clone https://github.com/TianhuaGao/math-prose.git \
   .agents/skills/math-prose
 ```
 
-Codex discovers skills from user and repository skill directories. If the
-skill does not appear immediately, restart Codex. See OpenAI's
-[skills documentation](https://learn.chatgpt.com/docs/build-skills) for the
-current discovery and invocation behavior.
+Automatic discovery and invocation depend on the client implementation. The
+[Agent Skills integration guide](https://agentskills.io/client-implementation/adding-skills-support)
+describes the standard discovery and progressive-loading model.
+
+### Agents without native skill support
+
+Clone the repository anywhere accessible to the agent:
+
+```bash
+git clone https://github.com/TianhuaGao/math-prose.git
+```
+
+Then instruct the agent to read `math-prose/SKILL.md`, follow its workflow, and
+load the referenced files only when the task requires them. This manual route
+provides the same writing guidance, although automatic selection and interface
+features depend on the host agent.
 
 ## Usage
 
-Invoke the skill explicitly with `$math-prose`:
+Select or invoke `math-prose` through your agent's skill interface. If the
+client has no explicit skill syntax, ask the agent to use the Math Prose skill
+or to read its `SKILL.md` before completing the task.
 
 ```text
-Use $math-prose to revise this paragraph while preserving every equation,
-symbol, assumption, and citation.
+Use the math-prose skill to revise this paragraph while preserving every
+equation, symbol, assumption, and citation.
 ```
 
 ```text
-Use $math-prose to audit the following theorem statement and proof for unclear
-definitions, false equivalence, and unsupported inference language. Do not
-rewrite it yet.
+Use the math-prose skill to audit the following theorem statement and proof for
+unclear definitions, false equivalence, and unsupported inference language.
+Do not rewrite it yet.
 ```
 
 ```text
-Use $math-prose to write the prose around these equations. Introduce the given
-data, define the decision variables, state the optimization problem, and
-interpret the solution without adding convexity or uniqueness claims.
+Use the math-prose skill to write the prose around these equations. Introduce
+the given data, define the decision variables, state the optimization problem,
+and interpret the solution without adding convexity or uniqueness claims.
 ```
 
-Codex may also select the skill automatically when a request matches its
-description. Explicit invocation is useful when mathematical preservation is a
-hard requirement.
+A skills-compatible agent may select the skill automatically when a request
+matches its description. Explicit selection is useful when mathematical
+preservation is a hard requirement.
 
 For best results, provide:
 
@@ -209,7 +218,7 @@ and asks for clarification or reports the possible interpretations.
 ```text
 math-prose/
 ├── SKILL.md                         # Agent workflow and trigger description
-├── agents/openai.yaml               # User-interface metadata
+├── agents/openai.yaml               # Optional client-specific UI metadata
 ├── references/
 │   ├── behavior-taxonomy.md         # The 31 mathematical behaviors
 │   ├── equation-discourse.md        # Equation and paragraph structures
