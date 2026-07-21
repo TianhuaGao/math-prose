@@ -188,18 +188,20 @@ See the full
 
 The core corpus currently contains:
 
-- **32 influential anchors**: 24 research articles and 8 classic or
-  established textbooks;
-- **112 localized, paraphrased prose observations**;
+- **36 influential anchors**: 24 research articles, 10 classic or established
+  textbooks, 1 research monograph, and 1 survey or guide;
+- **136 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- 8 anchors in each of pure mathematics, applied mathematics, probability and
+- 9 anchors in each of pure mathematics, applied mathematics, probability and
   statistics, and optimization and numerical analysis.
 
 Research articles provide evidence for publication-state compression, while
-textbooks provide fuller evidence for definitions, constructions, derivations,
-and proofs. Sources act as evidence anchors, not as authors to imitate.
+textbooks and the research monograph provide fuller evidence for definitions,
+constructions, derivations, and proofs. The survey-and-guide anchor contributes
+reference-style definitions, validity conditions, and bounds. Sources act as
+evidence anchors, not as authors to imitate.
 
 The public corpus stores bibliographic metadata, precise locators, behavior
 annotations, cue phrases, and paraphrased observations. It contains no paper or
@@ -208,6 +210,61 @@ textbook full text and currently stores no verbatim source quotations.
 Explore the
 [core corpus](references/corpora/math-core.jsonl) and the
 [corpus construction method](references/corpus-method.md).
+
+## Corpus Sources
+
+The list below is the complete source registry for the current core corpus.
+Each entry links to the stable access or metadata page recorded in the corpus;
+the JSONL registry remains authoritative for editions, access constraints,
+influence evidence, and observation locators.
+
+### Applied Mathematics
+
+- Claude E. Shannon. [*A Mathematical Theory of Communication*](https://doi.org/10.1002/j.1538-7305.1948.tb01338.x). Bell System Technical Journal, 1948. — `research-article`
+- A. M. Turing. [*The Chemical Basis of Morphogenesis*](https://royalsocietypublishing.org/doi/10.1098/rstb.1952.0012). Philosophical Transactions of the Royal Society B, 1952. — `research-article`
+- Leonid I. Rudin, Stanley Osher, Emad Fatemi. [*Nonlinear Total Variation Based Noise Removal Algorithms*](https://doi.org/10.1016/0167-2789(92)90242-F). Physica D, 1992. — `research-article`
+- Michael G. Crandall, Hitoshi Ishii, Pierre-Louis Lions. [*User's Guide to Viscosity Solutions of Second Order Partial Differential Equations*](https://arxiv.org/abs/math/9207212). Bulletin of the American Mathematical Society, 1992. — `research-article`
+- Richard Jordan, David Kinderlehrer, Felix Otto. [*The Variational Formulation of the Fokker–Planck Equation*](https://doi.org/10.1137/S0036141096303359). SIAM Journal on Mathematical Analysis, 1998. — `research-article`
+- David J. C. MacKay. [*Information Theory, Inference, and Learning Algorithms*](https://www.inference.org.uk/mackay/itila/book.html). Cambridge University Press, 2003. — `textbook`
+- Emmanuel J. Candès, Justin Romberg, Terence Tao. [*Robust Uncertainty Principles: Exact Signal Reconstruction from Highly Incomplete Frequency Information*](https://arxiv.org/abs/math/0409186). IEEE Transactions on Information Theory, 2006. — `research-article`
+- Gerald Teschl. [*Ordinary Differential Equations and Dynamical Systems*](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/index.html). American Mathematical Society, 2012. — `textbook`
+- NIST Digital Library of Mathematical Functions Editorial Board. [*NIST Digital Library of Mathematical Functions*](https://dlmf.nist.gov/). National Institute of Standards and Technology, 2026. — `survey-or-guide`
+
+### Optimization and Numerical Analysis
+
+- Herbert Robbins, Sutton Monro. [*A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586). Annals of Mathematical Statistics, 1951. — `research-article`
+- Y. E. Nesterov. [*A Method for Solving the Convex Programming Problem with Convergence Rate O(1/k^2)*](https://www.mathnet.ru/eng/dan46009). Soviet Mathematics Doklady, 1983. — `research-article`
+- Lloyd N. Trefethen, David Bau III. [*Numerical Linear Algebra*](https://people.maths.ox.ac.uk/trefethen/text.html). Society for Industrial and Applied Mathematics, 1997. — `textbook`
+- Nicholas J. Higham. [*Accuracy and Stability of Numerical Algorithms*](https://nhigham.com/accuracy-and-stability-of-numerical-algorithms/). Society for Industrial and Applied Mathematics, 2002. — `research-monograph`
+- Stephen Boyd, Lieven Vandenberghe. [*Convex Optimization*](https://web.stanford.edu/~boyd/cvxbook/). Cambridge University Press, 2004. — `textbook`
+- Amir Beck, Marc Teboulle. [*A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems*](https://doi.org/10.1137/080716542). SIAM Journal on Imaging Sciences, 2009. — `research-article`
+- Antonin Chambolle, Thomas Pock. [*A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging*](https://optimization-online.org/2010/06/2646/). Journal of Mathematical Imaging and Vision, 2011. — `research-article`
+- John Duchi, Elad Hazan, Yoram Singer. [*Adaptive Subgradient Methods for Online Learning and Stochastic Optimization*](https://www.jmlr.org/papers/v12/duchi11a.html). Journal of Machine Learning Research, 2011. — `research-article`
+- Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein. [*Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers*](https://stanford.edu/~boyd/papers/admm_distr_stats.html). Foundations and Trends in Machine Learning, 2011. — `research-article`
+
+### Probability and Statistics
+
+- Nicholas Metropolis, Arianna W. Rosenbluth, Marshall N. Rosenbluth, Augusta H. Teller, Edward Teller. [*Equation of State Calculations by Fast Computing Machines*](https://www.osti.gov/biblio/4390578). Journal of Chemical Physics, 1953. — `research-article`
+- E. L. Kaplan, Paul Meier. [*Nonparametric Estimation from Incomplete Observations*](https://doi.org/10.1080/01621459.1958.10501452). Journal of the American Statistical Association, 1958. — `research-article`
+- W. K. Hastings. [*Monte Carlo Sampling Methods Using Markov Chains and Their Applications*](https://academic.oup.com/biomet/article-abstract/57/1/97/284580). Biometrika, 1970. — `research-article`
+- D. R. Cox. [*Regression Models and Life-Tables*](https://rss.onlinelibrary.wiley.com/doi/10.1111/j.2517-6161.1972.tb00899.x). Journal of the Royal Statistical Society: Series B, 1972. — `research-article`
+- Bradley Efron. [*Bootstrap Methods: Another Look at the Jackknife*](https://projecteuclid.org/journals/annals-of-statistics/volume-7/issue-1/Bootstrap-Methods-Another-Look-at-the-Jackknife/10.1214/aos/1176344552.full). Annals of Statistics, 1979. — `research-article`
+- David Williams. [*Probability with Martingales*](https://www.cambridge.org/highereducation/books/probability-with-martingales/B4CFCE0D08930FB46C6E93E775503926). Cambridge University Press, 1991. — `textbook`
+- Charles M. Grinstead, J. Laurie Snell. [*Introduction to Probability*](https://math.dartmouth.edu/~prob/prob/prob.pdf). American Mathematical Society, 1997. — `textbook`
+- Matthew D. Hoffman, Andrew Gelman. [*The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo*](https://jmlr.org/papers/v15/hoffman14a.html). Journal of Machine Learning Research, 2014. — `research-article`
+- David A. Levin, Yuval Peres, Elizabeth L. Wilmer. [*Markov Chains and Mixing Times*](https://pages.uoregon.edu/dlevin/MARKOV/). American Mathematical Society, 2017. — `textbook`
+
+### Pure Mathematics
+
+- M. F. Atiyah, I. M. Singer. [*The Index of Elliptic Operators: I*](https://annals.math.princeton.edu/1968/87-3/p05). Annals of Mathematics, 1968. — `research-article`
+- Andrew Wiles. [*Modular Elliptic Curves and Fermat's Last Theorem*](https://annals.math.princeton.edu/1995/141-3/p01). Annals of Mathematics, 1995. — `research-article`
+- W. T. Gowers. [*A New Proof of Szemerédi's Theorem*](https://www.dpmms.cam.ac.uk/~wtg10/papers.html). Geometric and Functional Analysis, 2001. — `research-article`
+- Allen Hatcher. [*Algebraic Topology*](https://pi.math.cornell.edu/~hatcher/AT/ATpage.html). Cambridge University Press, 2002. — `textbook`
+- Grisha Perelman. [*The Entropy Formula for the Ricci Flow and Its Geometric Applications*](https://arxiv.org/abs/math/0211159). arXiv, 2002. — `research-article`
+- Manindra Agrawal, Neeraj Kayal, Nitin Saxena. [*PRIMES Is in P*](https://annals.math.princeton.edu/2004/160-2/p12). Annals of Mathematics, 2004. — `research-article`
+- Ben Green, Terence Tao. [*The Primes Contain Arbitrarily Long Arithmetic Progressions*](https://annals.math.princeton.edu/2008/167-2/p03). Annals of Mathematics, 2008. — `research-article`
+- John M. Lee. [*Introduction to Smooth Manifolds*](https://sites.math.washington.edu/~lee/Books/ISM/). Springer, 2013. — `textbook`
+- Sheldon Axler. [*Linear Algebra Done Right*](https://linear.axler.net/index.html). Springer, 2024. — `textbook`
 
 ## Repository Structure
 
