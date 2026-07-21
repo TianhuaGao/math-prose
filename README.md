@@ -2,34 +2,28 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-**Evidence-informed mathematical writing for AI agents.**
+**Precise, natural mathematical writing for AI agents—without changing the
+mathematics.**
 
 Math Prose is an open Agent Skill for drafting, revising, and auditing English
-mathematical prose without silently changing the mathematics. It helps an AI
-agent choose language from the mathematical action being performed, rather
-than from a list of interchangeable synonyms.
+mathematical prose. It helps an AI agent choose language from the mathematical
+action being performed, instead of rotating through a list of synonyms.
 
-Use it for research papers, theses, technical reports, proofs, derivations,
-optimization problems, dynamical systems, notation blocks, and prose around
-displayed equations.
+Use it for research papers, theses, technical reports, theorem statements,
+proofs, derivations, notation blocks, optimization problems, dynamical systems,
+and prose around displayed equations.
 
-The repository follows the open
-[Agent Skills specification](https://agentskills.io/specification): a portable
-`SKILL.md` entry point with supporting references and scripts. Any
-skills-compatible agent can load it. An agent without native skill discovery
-can still use the same instructions by reading `SKILL.md` and resolving its
-linked resources relative to the repository root.
+Math Prose follows the open
+[Agent Skills specification](https://agentskills.io/specification). Any
+skills-compatible agent can load its `SKILL.md`; agents without native skill
+support can use the same workflow by reading that file directly.
 
 ## Why Math Prose?
 
-Mathematical writing often becomes repetitive because many different actions
-are expressed with the same verb:
-
-> The matrix is the attitude. The vector is the error. The control moment is
-> the output.
-
-Replacing every *is* mechanically does not solve the problem. The writer first
-has to determine what each sentence does:
+Many mathematical sentences contain *is*, but they do not all perform the same
+action. A sentence may assign notation, introduce a definition, provide an
+explicit formula, report a calculation, state an assumption, or draw a logical
+consequence. Those distinctions determine the appropriate wording.
 
 | Mathematical action | Typical construction |
 |---|---|
@@ -42,63 +36,36 @@ has to determine what each sentence does:
 | State an assumption | `Given ...`, `Suppose ...`, or `Assume ...` |
 | Interpret a quantity | `represents`, `measures`, or `encodes` |
 
-Math Prose makes these distinctions explicit. It also retains plain forms such
-as *is* and *are* when they are the clearest way to state identity, membership,
-status, or a mathematical property.
+The goal is not to eliminate *is*. Plain forms such as *is* and *are* remain
+the clearest choice for identity, membership, status, and many mathematical
+properties.
 
-## What It Does
+### It also avoids mechanical variation
 
-- drafts equation-adjacent prose from formulas and author notes;
-- revises repetitive or mechanical prose while preserving supplied formulas;
-- audits notation, definitions, domains, assumptions, and first use;
-- distinguishes `define`, `denote`, `given by`, `express`, `derive`, and
-  `deduce` by mathematical function;
-- protects implication direction, equivalence, approximation order, and claim
-  strength;
-- flags unsupported existence, uniqueness, optimality, convergence, or
-  stability claims instead of inventing a proof;
-- supports definition blocks, derivations, theorem statements, proofs,
-  optimization, recurrences, and continuous-time dynamics.
-
-## Quick Example
-
-Input:
+A synonym-only edit can replace one repeated frame with another:
 
 ```text
-x∈X is the decision variable and y is the data. J is the objective and g is the
-constraint. The solution is
-
-x* ∈ arg min_{x∈X} J(x;y),  g(x;y) ≤ 0.
+The measured state collects these quantities in the ordered tuple X=(...).
+The desired state collects these quantities in the ordered tuple X_d=(...).
 ```
 
-Possible revision:
+When the surrounding mathematics supports distinct roles, Math Prose can vary
+the information structure instead:
 
 ```text
-Given the data y, estimate the decision variable x∈X by solving
-
-x* ∈ arg min_{x∈X} J(x;y)  subject to  g(x;y)≤0,
-
-where J denotes the objective and g specifies the inequality constraint.
+The measured variables form the state tuple X=(...).
+Define the desired reference by X_d=(...).
 ```
 
-The revision clarifies the mathematical roles but does not add convexity,
-feasibility, existence, or uniqueness assumptions.
+If the two objects are genuinely parallel, the skill retains the parallel
+wording. It never trades mathematical precision for surface-level variety.
 
-Math Prose also catches overclaims. For example, a Lyapunov inequality stated
-only on a neighborhood does not by itself establish global exponential
-stability. The skill preserves the local scope and reports the missing
-hypotheses.
+## Quick Start
 
-## Install
+### 1. Install the skill
 
-### Skills-compatible agents
-
-Install this repository with the skill installer or registry provided by your
-agent client. Installation commands and user-level skill directories vary by
-client, so consult that client's documentation for the exact location.
-
-If your client scans the common project-level `.agents/skills` directory, add
-Math Prose to a project with:
+For a project-level installation using the cross-client `.agents/skills`
+convention:
 
 ```bash
 mkdir -p .agents/skills
@@ -106,134 +73,165 @@ git clone https://github.com/TianhuaGao/math-prose.git \
   .agents/skills/math-prose
 ```
 
-Automatic discovery and invocation depend on the client implementation. The
-[Agent Skills integration guide](https://agentskills.io/client-implementation/adding-skills-support)
-describes the standard discovery and progressive-loading model.
-
-### Agents without native skill support
-
-Clone the repository anywhere accessible to the agent:
+For a user-level installation:
 
 ```bash
-git clone https://github.com/TianhuaGao/math-prose.git
+mkdir -p ~/.agents/skills
+git clone https://github.com/TianhuaGao/math-prose.git \
+  ~/.agents/skills/math-prose
 ```
 
-Then instruct the agent to read `math-prose/SKILL.md`, follow its workflow, and
-load the referenced files only when the task requires them. This manual route
-provides the same writing guidance, although automatic selection and interface
-features depend on the host agent.
+Skill discovery paths and invocation syntax vary by agent client. If your
+client uses a different skill directory or provides its own installer, use the
+client's documented installation method.
 
-## Usage
+If your agent has no native skill support, clone the repository anywhere the
+agent can read it, then ask the agent to open `math-prose/SKILL.md` and resolve
+its linked resources relative to the repository root.
 
-Select or invoke `math-prose` through your agent's skill interface. If the
-client has no explicit skill syntax, ask the agent to use the Math Prose skill
-or to read its `SKILL.md` before completing the task.
+### 2. Ask the agent to use Math Prose
 
 ```text
 Use the math-prose skill to revise this paragraph while preserving every
-equation, symbol, assumption, and citation.
+equation, symbol, assumption, number, and citation.
 ```
 
-```text
-Use the math-prose skill to audit the following theorem statement and proof for
-unclear definitions, false equivalence, and unsupported inference language.
-Do not rewrite it yet.
-```
+A skills-compatible agent may also select Math Prose automatically when the
+request matches the skill description.
 
-```text
-Use the math-prose skill to write the prose around these equations. Introduce
-the given data, define the decision variables, state the optimization problem,
-and interpret the solution without adding convexity or uniqueness claims.
-```
+### 3. Provide the mathematical contract
 
-A skills-compatible agent may select the skill automatically when a request
-matches its description. Explicit selection is useful when mathematical
-preservation is a hard requirement.
+For the most reliable result, include:
 
-For best results, provide:
-
-- the formulas and existing prose;
-- notation or equations that must remain unchanged;
+- the formulas and current prose;
+- notation, numbers, and citations that must remain unchanged;
 - known assumptions and the intended claim strength;
 - the desired mode: draft, revise, or audit only;
-- any venue, terminology, or style constraints.
+- venue, terminology, or style constraints.
+
+## What Can I Ask It to Do?
+
+### Draft from mathematics
+
+```text
+Write the prose around these equations. Introduce the given data, define the
+decision variables, state the optimization problem, and interpret the solution
+without adding convexity, feasibility, or uniqueness claims.
+```
+
+### Revise existing prose
+
+```text
+Revise this notation block. Reduce repeated sentence frames, but preserve all
+formulas and keep deliberate parallelism where the objects play parallel roles.
+```
+
+### Audit without rewriting
+
+```text
+Audit this theorem statement and proof for undefined notation, false
+equivalence, unclear antecedents, and unsupported inference language. Report
+the issues without rewriting the text.
+```
+
+### Check logical force
+
+```text
+Check whether “deduce,” “therefore,” “equivalently,” and “guarantees” are
+justified by the visible derivation. Do not strengthen any claim.
+```
+
+## What It Protects
+
+By default, Math Prose preserves:
+
+- formulas, symbols, operators, indices, signs, and quantifiers;
+- assumptions, domains, codomains, admissible sets, and edge conditions;
+- approximation order, implication direction, and equivalence;
+- numbers, units, citations, and stated claim strength;
+- stable technical terminology required by the field.
+
+It does not silently repair ambiguous mathematics, invent missing hypotheses,
+fabricate a derivation or proof, or claim that numerical evidence establishes a
+theorem. When the source relation is ambiguous, the skill keeps that ambiguity
+visible and reports the possible interpretations.
 
 ## How It Works
 
-Math Prose uses a 31-behavior taxonomy organized into six groups:
+For each equation-adjacent sentence, the skill:
 
-1. declaration and scope;
-2. representation and construction;
-3. transformation and equivalence;
-4. inference and results;
-5. dynamics and computation;
-6. interpretation and comparison.
+1. records the mathematical content that must remain unchanged;
+2. classifies the sentence's mathematical behavior;
+3. identifies its position before, within, or after the displayed equation;
+4. selects a construction licensed by that behavior;
+5. checks the logical strength of inference and result language;
+6. revises sentence structure before considering vocabulary changes;
+7. compares nearby sentence frames and runs a preservation audit.
 
-For each sentence, the skill identifies the mathematical behavior, its
-position relative to the equation, and the strength of the claim. It then
-selects a construction whose meaning matches that behavior and audits the
-result against the supplied mathematics.
+The behavior taxonomy contains 31 cases in six groups:
 
-The complete taxonomy is available in
-[references/behavior-taxonomy.md](references/behavior-taxonomy.md).
+| Group | Coverage |
+|---|---|
+| A. Declaration and scope | variables, notation, definitions, types, assumptions, indexing |
+| B. Representation and construction | mappings, formulas, decompositions, parameterizations, aggregation |
+| C. Transformation and equivalence | substitution, rewriting, simplification, approximation, normalization |
+| D. Inference and results | implication, derivation, bounds, existence, uniqueness, optimality, convergence |
+| E. Dynamics and computation | differential equations, recurrences, algorithms, initialization, updates |
+| F. Interpretation and comparison | meaning, measurement, encoding, contrast, limiting behavior |
+
+See the full
+[behavior taxonomy](references/behavior-taxonomy.md),
+[equation-discourse guide](references/equation-discourse.md), and
+[proof and claim-language guide](references/proof-and-claim-language.md).
 
 ## Evidence Base
 
 The core corpus currently contains:
 
-- **32 influential anchors**: 24 research articles and 8 classic or established
-  textbooks;
-- **112 localized prose observations**;
-- **all 31 mathematical behavior codes**;
-- **31 synthesized patterns**, all validated across at least three independent
+- **32 influential anchors**: 24 research articles and 8 classic or
+  established textbooks;
+- **112 localized, paraphrased prose observations**;
+- coverage of **all 31 mathematical behavior codes**;
+- **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- equal source coverage across pure mathematics, applied mathematics,
-  probability and statistics, and optimization and numerical analysis.
+- 8 anchors in each of pure mathematics, applied mathematics, probability and
+  statistics, and optimization and numerical analysis.
 
-The corpus includes source metadata, precise locators, behavior annotations,
-cue phrases, and paraphrased observations. It does **not** redistribute paper
-or textbook full text. Research articles supply publication-state mathematical
-prose; textbooks supply fuller evidence for definitions, constructions,
-derivations, and proofs. Both are used as evidence anchors, not as authors to
-imitate.
+Research articles provide evidence for publication-state compression, while
+textbooks provide fuller evidence for definitions, constructions, derivations,
+and proofs. Sources act as evidence anchors, not as authors to imitate.
 
-Explore the evidence in
-[references/corpora/math-core.jsonl](references/corpora/math-core.jsonl) and
-the construction method in
-[references/corpus-method.md](references/corpus-method.md).
+The public corpus stores bibliographic metadata, precise locators, behavior
+annotations, cue phrases, and paraphrased observations. It contains no paper or
+textbook full text and currently stores no verbatim source quotations.
 
-## Boundaries
-
-By default, Math Prose:
-
-- preserves supplied formulas, notation, numbers, assumptions, citations, and
-  claim strength;
-- does not silently repair ambiguous or incorrect mathematics;
-- does not treat stylistic variation as permission to change meaning;
-- does not claim that a numerical experiment proves a theorem;
-- does not imitate one paper or author.
-
-When the source relation is ambiguous, the skill keeps the ambiguity visible
-and asks for clarification or reports the possible interpretations.
+Explore the
+[core corpus](references/corpora/math-core.jsonl) and the
+[corpus construction method](references/corpus-method.md).
 
 ## Repository Structure
 
 ```text
 math-prose/
 ├── SKILL.md                         # Agent workflow and trigger description
-├── agents/openai.yaml               # Optional client-specific UI metadata
+├── agents/openai.yaml               # Optional client UI metadata
 ├── references/
 │   ├── behavior-taxonomy.md         # The 31 mathematical behaviors
 │   ├── equation-discourse.md        # Equation and paragraph structures
 │   ├── proof-and-claim-language.md  # Logical-force safeguards
 │   ├── corpus-method.md             # Evidence and annotation protocol
-│   ├── core-evaluation.md           # Blind forward-test record
+│   ├── core-evaluation.md           # Forward-test record
 │   └── corpora/math-core.jsonl      # Core evidence registry
 ├── scripts/validate_corpus.py       # Corpus and readiness validator
 └── tests/test_validate_corpus.py    # Validator tests
 ```
 
+The runtime entry point stays concise. Detailed guidance and corpus data are
+loaded only when a task needs them.
+
 ## Validation
+
+The validator uses only the Python standard library.
 
 Validate the corpus and its readiness gate:
 
@@ -242,31 +240,40 @@ python3 scripts/validate_corpus.py --require-core-ready \
   references/corpora/math-core.jsonl
 ```
 
-Run the validator tests:
+Run the test suite:
 
 ```bash
 python3 -m unittest discover -s tests -v
 ```
 
+If the Agent Skills reference validator is installed, validate the skill
+package with:
+
+```bash
+skills-ref validate .
+```
+
 The current forward tests cover definitions, mapping direction, proof-claim
 strength, asymptotic derivation, optimization roles, state-dependent
-initialization, and ordered updates. See
-[references/core-evaluation.md](references/core-evaluation.md).
+initialization, ordered updates, and local repetition. See the
+[core evaluation record](references/core-evaluation.md).
 
 ## Contributing
 
-Issues and pull requests are welcome. Corpus contributions should preserve the
-three evidence levels:
+Issues and pull requests are welcome. Corpus contributions should keep three
+evidence levels separate:
 
-1. a source record with stable bibliographic, genre, access, and influence
+1. a source record with stable bibliographic, access, genre, and influence
    evidence;
 2. a localized observation with an auditable locator and paraphrased summary;
 3. a synthesized pattern with explicit boundaries and supporting source IDs.
 
-Do not add long quotations or full paper text. A pattern may be marked
-`validated` only when matching observations support it in at least three
-independent anchor sources from the same corpus layer. Run the corpus validator
-and unit tests before submitting a pull request.
+Please do not add full papers, textbook chapters, or long quotations. A pattern
+may be marked `validated` only when matching observations support it in at
+least three independent anchor sources from the same corpus layer. For a
+domain-general core pattern, evidence should span at least two disciplines.
+
+Before submitting a pull request, run the corpus validator and unit tests.
 
 ## License
 
