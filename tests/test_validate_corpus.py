@@ -134,6 +134,29 @@ class CorpusValidationTests(unittest.TestCase):
             "pattern_inventory: constructions=2, boundaries=1",
         )
 
+    def test_pattern_inventory_rejects_normalized_duplicates(self) -> None:
+        pattern = {
+            "_location": "test:1",
+            "id": "pat-test",
+            "record_type": "pattern",
+            "corpus_layer": "core",
+            "behavior": "A0",
+            "intent": "Fixture pattern.",
+            "constructions": ["is continuous", "  Is   Continuous  "],
+            "boundaries": ["State the domain.", "state   the domain."],
+            "synthetic_example": "The map is continuous.",
+            "source_ids": [],
+            "status": "seed",
+        }
+
+        errors = validate_corpus.validate([pattern], [])
+        self.assertTrue(
+            any("constructions contains duplicate entries" in error for error in errors)
+        )
+        self.assertTrue(
+            any("boundaries contains duplicate entries" in error for error in errors)
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

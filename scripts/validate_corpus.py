@@ -138,10 +138,30 @@ def read_jsonl(paths: Iterable[str]) -> tuple[list[dict[str, Any]], list[str]]:
     return records, errors
 
 
-def require_string_list(record: dict[str, Any], field: str, errors: list[str]) -> None:
+def require_string_list(
+    record: dict[str, Any],
+    field: str,
+    errors: list[str],
+    *,
+    normalize_duplicates: bool = False,
+) -> None:
     value = record.get(field)
     if not isinstance(value, list) or not all(isinstance(item, str) and item.strip() for item in value):
         errors.append(f"{record['_location']}: {field} must be a list of non-empty strings")
+        return
+
+    seen: dict[str, str] = {}
+    for item in value:
+        normalized = (
+            " ".join(item.split()).casefold() if normalize_duplicates else item
+        )
+        if normalized in seen:
+            errors.append(
+                f"{record['_location']}: {field} contains duplicate entries "
+                f"{seen[normalized]!r} and {item!r}"
+            )
+        else:
+            seen[normalized] = item
 
 
 def require_non_empty_string(record: dict[str, Any], field: str, errors: list[str]) -> None:
@@ -246,8 +266,10 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
                 require_non_empty_string(record, "domain", errors)
             check_enum(record, "behavior", BEHAVIORS, errors)
             check_enum(record, "status", STATUSES, errors)
-            require_string_list(record, "constructions", errors)
-            require_string_list(record, "boundaries", errors)
+            require_string_list(
+                record, "constructions", errors, normalize_duplicates=True
+            )
+            require_string_list(record, "boundaries", errors, normalize_duplicates=True)
             require_string_list(record, "source_ids", errors)
             source_ids = record.get("source_ids", [])
             if isinstance(source_ids, list):
