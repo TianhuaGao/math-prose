@@ -98,6 +98,19 @@ class CorpusValidationTests(unittest.TestCase):
         errors = validate_corpus.validate([source], [])
         self.assertTrue(any("unsupported source_genre" in error for error in errors))
 
+    def test_summary_behavior_counts_include_observations_only(self) -> None:
+        records = [
+            {"record_type": "observation", "behavior": "C1"},
+            {"record_type": "pattern", "behavior": "C1"},
+            {"record_type": "pattern", "behavior": "E2"},
+        ]
+
+        behavior_line = next(
+            line for line in validate_corpus.summarize(records).splitlines()
+            if line.startswith("behaviors:")
+        )
+        self.assertEqual(behavior_line, "behaviors: C1=1")
+
 
 if __name__ == "__main__":
     unittest.main()

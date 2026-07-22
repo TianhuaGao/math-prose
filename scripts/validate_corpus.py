@@ -346,7 +346,10 @@ def validate_core_readiness(records: Iterable[dict[str, Any]]) -> list[str]:
 def summarize(records: Iterable[dict[str, Any]]) -> str:
     records = list(records)
     types = Counter(record.get("record_type", "unknown") for record in records)
-    behaviors = Counter(record.get("behavior") for record in records if record.get("behavior"))
+    behaviors = Counter(
+        record.get("behavior") for record in records
+        if record.get("record_type") == "observation" and record.get("behavior")
+    )
     disciplines = Counter(
         record.get("discipline") for record in records
         if record.get("record_type") == "source" and record.get("discipline")

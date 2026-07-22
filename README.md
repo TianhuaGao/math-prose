@@ -190,7 +190,7 @@ The core corpus currently contains:
 
 - **50 influential anchors**: 26 research articles, 22 classic or established
   textbooks, 1 research monograph, and 1 survey or guide;
-- **192 localized, paraphrased prose observations**;
+- **202 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
