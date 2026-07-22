@@ -188,14 +188,14 @@ See the full
 
 The core corpus currently contains:
 
-- **44 influential anchors**: 24 research articles, 18 classic or established
+- **50 influential anchors**: 26 research articles, 22 classic or established
   textbooks, 1 research monograph, and 1 survey or guide;
-- **168 localized, paraphrased prose observations**;
+- **192 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- 11 anchors in each of pure mathematics, applied mathematics, probability and
-  statistics, and optimization and numerical analysis.
+- 13 anchors each in pure mathematics and optimization and numerical analysis,
+  plus 12 anchors each in applied mathematics and probability and statistics.
 
 Research articles provide evidence for publication-state compression, while
 textbooks and the research monograph provide fuller evidence for definitions,
@@ -210,6 +210,10 @@ textbook full text and currently stores no verbatim source quotations.
 Explore the
 [core corpus](references/corpora/math-core.jsonl) and the
 [corpus construction method](references/corpus-method.md).
+The [`domain/control-systems`](https://github.com/TianhuaGao/math-prose/tree/domain/control-systems)
+branch adds 2 reviewed control-systems anchors and 8 localized observations
+without mixing field-specific flow/jump and barrier-function semantics into
+the transferable core.
 
 ## Corpus Sources
 
@@ -230,6 +234,7 @@ influence evidence, and observation locators.
 - Emmanuel J. Candès, Justin Romberg, Terence Tao. [*Robust Uncertainty Principles: Exact Signal Reconstruction from Highly Incomplete Frequency Information*](https://arxiv.org/abs/math/0409186). IEEE Transactions on Information Theory, 2006. — `research-article`
 - Lawrence C. Evans. [*Partial Differential Equations*](https://bookstore.ams.org/gsm-19-r). American Mathematical Society, 2010. — `textbook`
 - Gerald Teschl. [*Ordinary Differential Equations and Dynamical Systems*](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/index.html). American Mathematical Society, 2012. — `textbook`
+- Karl Johan Åström, Richard M. Murray. [*Feedback Systems: An Introduction for Scientists and Engineers*](https://fbswiki.org/wiki/index.php/Main_Page). Princeton University Press, 2021. — `textbook`
 - NIST Digital Library of Mathematical Functions Editorial Board. [*NIST Digital Library of Mathematical Functions*](https://dlmf.nist.gov/). National Institute of Standards and Technology, 2026. — `survey-or-guide`
 
 ### Optimization and Numerical Analysis
@@ -237,9 +242,11 @@ influence evidence, and observation locators.
 - Herbert Robbins, Sutton Monro. [*A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586). Annals of Mathematical Statistics, 1951. — `research-article`
 - Y. E. Nesterov. [*A Method for Solving the Convex Programming Problem with Convergence Rate O(1/k^2)*](https://www.mathnet.ru/eng/dan46009). Soviet Mathematics Doklady, 1983. — `research-article`
 - Lloyd N. Trefethen, David Bau III. [*Numerical Linear Algebra*](https://people.maths.ox.ac.uk/trefethen/text.html). Society for Industrial and Applied Mathematics, 1997. — `textbook`
+- Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, L. Donatella Marini. [*Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems*](https://www-users.cse.umn.edu/~arnold/papers/dgerr.pdf). SIAM Journal on Numerical Analysis, 2002. — `research-article`
 - Nicholas J. Higham. [*Accuracy and Stability of Numerical Algorithms*](https://nhigham.com/accuracy-and-stability-of-numerical-algorithms/). Society for Industrial and Applied Mathematics, 2002. — `research-monograph`
 - Stephen Boyd, Lieven Vandenberghe. [*Convex Optimization*](https://web.stanford.edu/~boyd/cvxbook/). Cambridge University Press, 2004. — `textbook`
 - Jorge Nocedal, Stephen J. Wright. [*Numerical Optimization*](https://link.springer.com/book/10.1007/978-0-387-40065-5). Springer, 2006. — `textbook`
+- Susanne C. Brenner, L. Ridgway Scott. [*The Mathematical Theory of Finite Element Methods*](https://link.springer.com/book/10.1007/978-0-387-75934-0). Springer, 2008. — `textbook`
 - Amir Beck, Marc Teboulle. [*A Fast Iterative Shrinkage-Thresholding Algorithm for Linear Inverse Problems*](https://doi.org/10.1137/080716542). SIAM Journal on Imaging Sciences, 2009. — `research-article`
 - Antonin Chambolle, Thomas Pock. [*A First-Order Primal-Dual Algorithm for Convex Problems with Applications to Imaging*](https://optimization-online.org/2010/06/2646/). Journal of Mathematical Imaging and Vision, 2011. — `research-article`
 - John Duchi, Elad Hazan, Yoram Singer. [*Adaptive Subgradient Methods for Online Learning and Stochastic Optimization*](https://www.jmlr.org/papers/v12/duchi11a.html). Journal of Machine Learning Research, 2011. — `research-article`
@@ -259,9 +266,11 @@ influence evidence, and observation locators.
 - Matthew D. Hoffman, Andrew Gelman. [*The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo*](https://jmlr.org/papers/v15/hoffman14a.html). Journal of Machine Learning Research, 2014. — `research-article`
 - David A. Levin, Yuval Peres, Elizabeth L. Wilmer. [*Markov Chains and Mixing Times*](https://pages.uoregon.edu/dlevin/MARKOV/). American Mathematical Society, 2017. — `textbook`
 - Rick Durrett. [*Probability: Theory and Examples*](https://www.cambridge.org/core/books/probability/DD9A1907F810BB14CCFF022CDFC5677A). Cambridge University Press, 2019. — `textbook`
+- Simo Särkkä, Arno Solin. [*Applied Stochastic Differential Equations*](https://www.cambridge.org/core/books/applied-stochastic-differential-equations/6BB1B8B0819F8C12616E4A0C78C29EAA). Cambridge University Press, 2019. — `textbook`
 
 ### Pure Mathematics
 
+- N. Aronszajn. [*Theory of Reproducing Kernels*](https://www.ams.org/tran/1950-068-03/S0002-9947-1950-0051437-7/S0002-9947-1950-0051437-7.pdf). Transactions of the American Mathematical Society, 1950. — `research-article`
 - M. F. Atiyah, I. M. Singer. [*The Index of Elliptic Operators: I*](https://annals.math.princeton.edu/1968/87-3/p05). Annals of Mathematics, 1968. — `research-article`
 - Andrew Wiles. [*Modular Elliptic Curves and Fermat's Last Theorem*](https://annals.math.princeton.edu/1995/141-3/p01). Annals of Mathematics, 1995. — `research-article`
 - W. T. Gowers. [*A New Proof of Szemerédi's Theorem*](https://www.dpmms.cam.ac.uk/~wtg10/papers.html). Geometric and Functional Analysis, 2001. — `research-article`
@@ -271,6 +280,7 @@ influence evidence, and observation locators.
 - Terence Tao. [*Analysis I*](https://terrytao.wordpress.com/books/analysis-i/). Hindustan Book Agency, 2006. — `textbook`
 - Ben Green, Terence Tao. [*The Primes Contain Arbitrarily Long Arithmetic Progressions*](https://annals.math.princeton.edu/2008/167-2/p03). Annals of Mathematics, 2008. — `research-article`
 - Paolo Aluffi. [*Algebra: Chapter 0*](https://bookstore.ams.org/gsm-104/). American Mathematical Society, 2009. — `textbook`
+- Haim Brezis. [*Functional Analysis, Sobolev Spaces and Partial Differential Equations*](https://link.springer.com/book/10.1007/978-0-387-70914-7). Springer, 2011. — `textbook`
 - John M. Lee. [*Introduction to Smooth Manifolds*](https://sites.math.washington.edu/~lee/Books/ISM/). Springer, 2013. — `textbook`
 - Sheldon Axler. [*Linear Algebra Done Right*](https://linear.axler.net/index.html). Springer, 2024. — `textbook`
 
