@@ -194,7 +194,7 @@ The core corpus currently contains:
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- **143 reusable construction frames** across those patterns;
+- **172 reusable construction frames** across those patterns;
 - 13 anchors each in pure mathematics and optimization and numerical analysis,
   plus 12 anchors each in applied mathematics and probability and statistics.
 
@@ -311,6 +311,8 @@ loaded only when a task needs them.
 ## Validation
 
 The validator uses only the Python standard library.
+It reports construction and boundary totals and rejects case- or
+whitespace-normalized duplicates within construction and boundary lists.
 
 Validate the corpus and its readiness gate:
 
@@ -333,8 +335,11 @@ skills-ref validate .
 ```
 
 The current forward tests cover definitions, mapping direction, proof-claim
-strength, asymptotic derivation, optimization roles, state-dependent
-initialization, ordered updates, and local repetition. See the
+strength, quotient construction, metric projection, asymptotic operations,
+finite-dimensional and inexact surrogates, conditional uniqueness, semigroup
+generation, missing-relation handling, terminal initialization, convergence
+modes, invariant-set limits, dependency, comparison, bounded interpretation,
+ordered updates, and local repetition. See the
 [core evaluation record](references/core-evaluation.md).
 
 ## Contributing

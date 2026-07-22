@@ -14,6 +14,12 @@ not synonym rotation.
 1. **Protect the mathematical contract.** Record every symbol, equation,
    operator, sign, index, quantifier, condition, unit, citation, and claim
    strength that must remain unchanged. Do not silently repair mathematics.
+   If a requested relation is unspecified, retain a placeholder or flag the
+   gap instead of instantiating a convenient model. Do not infer unspoken
+   linear or affine structure from convexity: call the nearest-point map onto
+   a general closed convex set a metric projection, even when its metric comes
+   from an inner product; reserve orthogonal projection for a linear or affine
+   subspace with the corresponding geometry.
 2. **Classify the local mathematical behavior.** Assign one primary behavior
    from [references/behavior-taxonomy.md](references/behavior-taxonomy.md) to
    each equation-adjacent sentence. Add a secondary behavior only when the

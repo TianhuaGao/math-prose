@@ -55,11 +55,12 @@ strength of every changed sentence.
 
 ## Readiness decision
 
-The core passes the current forward-test gate for definitions, derivations,
-proof claims, optimization, and computation. This is a targeted functional
-check, not evidence that every mathematical subfield or house style has been
-exhausted. Repeat the evaluation when the taxonomy, core patterns, or writing
-workflow changes materially.
+The core passes the current targeted forward-test gate for declarations,
+constructions, transformations, proof claims, optimization, dynamics,
+convergence, comparison, and bounded interpretation. This is not evidence that
+every mathematical subfield or house style has been exhausted. Repeat the
+evaluation when the taxonomy, core patterns, or writing workflow changes
+materially.
 
 On 2026-07-21, 16 further observations were checked against five existing
 anchors and added without changing any recommended construction, boundary, or
@@ -69,3 +70,30 @@ coverage of piecewise displays, an additional `where`-clause role, and a proof
 calculation step. Structural validation and the existing validator unit tests
 were rerun; this evidence update is not counted as a new independent-agent
 forward test.
+
+## 2026-07-22 concrete-frame expansion tests
+
+After 29 concrete frames were added across 19 behaviors, eight fresh task
+sequences exercised the updated Skill without model answers or intended frames.
+The first construction run invented an unsupplied harmonicity relation, and the
+first dynamics run invented an unsupplied feedback model. Two intermediate
+construction reruns fixed the missing relation but mislabeled a metric
+projection onto a general closed convex set as orthogonal. All failures were
+preserved; the missing-relation and projection guards were strengthened, and
+the final reruns passed.
+
+| Area | Blind input behavior | Required distinction | Result |
+|---|---|---|---|
+| Construction and representation, pre-fix | Quotient by bilinearity relations, metric projection, additive error decomposition, and an unspecified harmonicity calculation | preserve missing mathematics instead of inventing a conditional-expectation identity, one-step relation, and notation | FAIL: invented the omitted relations and symbols |
+| Construction, first two repair attempts | The same facts with the harmonicity inputs still omitted | retain a symbol-free conditional statement and distinguish a convex-set metric projection from a subspace orthogonal projection | FAIL: missing mathematics was preserved, but both runs mislabeled the projection |
+| Construction, final rerun | The same quotient, projection, decomposition, and omitted harmonicity inputs | use metric-projection language and retain a conditional, symbol-free conclusion | PASS |
+| Transformation and inference | One-way reduction, termwise integration without differentiation permission, Galerkin and inexact surrogates, a uniform constant, and conditional uniqueness | sufficiency versus equivalence, operation-specific asymptotic permission, no invented numerical guarantee, quantifier order, and uniqueness without existence | PASS |
+| Dynamics and interpretation, pre-fix | Semigroup generator, unspecified feedback-induced law, terminal backward initialization, almost-sure random limit, invariant-set convergence, dependency, comparison, and scalar-only scope | preserve missing mathematics instead of instantiating a convenient model | FAIL: invented an open-loop equation, feedback law, and initial state |
+| Missing-relation rerun | The same semigroup, omitted feedback equation, terminal initialization, and qualified convergence facts | retain a placeholder and all supplied qualifiers without inventing symbols | PASS |
+| Revised C1 and F2 frames | Exact substitution plus term collection, followed by a normative likelihood-principle statement | calculation rather than proof force; prescriptive `should depend only on` rather than factual dependence | PASS after refusing the first under-specified input and receiving the formulas |
+
+These are scoped functional checks of the newly expanded behaviors. They do not
+formally verify every construction frame or establish universal stylistic
+coverage. The verbatim prompts, outputs, self-audits, and pre-fix failure are
+preserved in the
+[round-four artifact record](core-evaluation-round4-artifacts.md).
