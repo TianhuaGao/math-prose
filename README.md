@@ -194,6 +194,7 @@ The core corpus currently contains:
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
+- **143 reusable construction frames** across those patterns;
 - 13 anchors each in pure mathematics and optimization and numerical analysis,
   plus 12 anchors each in applied mathematics and probability and statistics.
 
@@ -206,6 +207,9 @@ evidence anchors, not as authors to imitate.
 The public corpus stores bibliographic metadata, precise locators, behavior
 annotations, cue phrases, and paraphrased observations. It contains no paper or
 textbook full text and currently stores no verbatim source quotations.
+The concrete phrase inventory lives in each pattern record's `constructions` array;
+the adjacent `boundaries` explain when a frame is too strong, ambiguous, or
+mathematically inapplicable.
 
 Explore the
 [core corpus](references/corpora/math-core.jsonl) and the

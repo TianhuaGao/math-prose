@@ -111,6 +111,29 @@ class CorpusValidationTests(unittest.TestCase):
         )
         self.assertEqual(behavior_line, "behaviors: C1=1")
 
+    def test_summary_counts_pattern_inventory_only(self) -> None:
+        records = [
+            {
+                "record_type": "pattern",
+                "constructions": ["define ... by ...", "is called ... if ..."],
+                "boundaries": ["Keep the definition stipulative."],
+            },
+            {
+                "record_type": "observation",
+                "constructions": ["must not be counted"],
+                "boundaries": ["must not be counted"],
+            },
+        ]
+
+        inventory_line = next(
+            line for line in validate_corpus.summarize(records).splitlines()
+            if line.startswith("pattern_inventory:")
+        )
+        self.assertEqual(
+            inventory_line,
+            "pattern_inventory: constructions=2, boundaries=1",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
