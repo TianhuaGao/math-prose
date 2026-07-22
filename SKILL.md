@@ -111,6 +111,9 @@ Use `research-article` observations to learn publication-state compression and
 `textbook` observations to learn fuller definition, construction, derivation,
 and proof exposition. Compress textbook scaffolding before producing manuscript
 prose, and do not mistake free access for permission to redistribute source text.
+When a user asks for concrete words or phrase inventory, return behavior-tagged
+`pattern.constructions` with their relevant boundaries, not observation metadata
+or source quotations.
 On a `domain/<field>` branch, load the matching domain corpus only when the task
 belongs to that field. Domain patterns supplement rather than replace the core.
 Run `python3 scripts/validate_corpus.py <core.jsonl> [domain.jsonl]` before

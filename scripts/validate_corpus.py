@@ -374,6 +374,16 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         record.get("status") for record in records
         if record.get("record_type") == "pattern" and record.get("status")
     )
+    construction_frames = sum(
+        len(record.get("constructions", [])) for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("constructions"), list)
+    )
+    boundary_rules = sum(
+        len(record.get("boundaries", [])) for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundaries"), list)
+    )
     type_summary = ", ".join(f"{key}={value}" for key, value in sorted(types.items())) or "none"
     behavior_summary = ", ".join(f"{key}={value}" for key, value in sorted(behaviors.items())) or "none"
     discipline_summary = ", ".join(
@@ -402,6 +412,7 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         f"source_genres: {source_genre_summary}\n"
         f"disciplines: {discipline_summary}\n"
         f"section_roles: {section_summary}\n"
+        f"pattern_inventory: constructions={construction_frames}, boundaries={boundary_rules}\n"
         f"pattern_statuses: {status_summary}"
     )
 
