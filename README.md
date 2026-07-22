@@ -284,6 +284,16 @@ influence evidence, and observation locators.
 - John M. Lee. [*Introduction to Smooth Manifolds*](https://sites.math.washington.edu/~lee/Books/ISM/). Springer, 2013. — `textbook`
 - Sheldon Axler. [*Linear Algebra Done Right*](https://linear.axler.net/index.html). Springer, 2024. — `textbook`
 
+### Control Systems Domain Overlay
+
+This branch keeps the 50-source core above and adds 2 field-specific anchors
+with 8 localized observations. The combined evidence base therefore contains
+52 sources and 200 observations; the overlay supplements the 31 core patterns
+without promoting control-specific semantics into the transferable layer.
+
+- Rafal Goebel, Ricardo G. Sanfelice, Andrew R. Teel. [*Hybrid Dynamical Systems*](https://hybrid.soe.ucsc.edu/biblio/2009/hybrid-dynamical-systems). IEEE Control Systems Magazine, 2009. — `survey-or-guide`
+- Aaron D. Ames, Xiangru Xu, Jessy W. Grizzle, Paulo Tabuada. [*Control Barrier Function Based Quadratic Programs for Safety Critical Systems*](https://authors.library.caltech.edu/records/jnhr0-1ww05). IEEE Transactions on Automatic Control, 2017. — `research-article`
+
 ## Repository Structure
 
 ```text
@@ -296,7 +306,9 @@ math-prose/
 │   ├── proof-and-claim-language.md  # Logical-force safeguards
 │   ├── corpus-method.md             # Evidence and annotation protocol
 │   ├── core-evaluation.md           # Forward-test record
-│   └── corpora/math-core.jsonl      # Core evidence registry
+│   └── corpora/
+│       ├── math-core.jsonl          # Core evidence registry
+│       └── control-systems.jsonl    # Control-systems overlay
 ├── scripts/validate_corpus.py       # Corpus and readiness validator
 └── tests/test_validate_corpus.py    # Validator tests
 ```
@@ -313,6 +325,14 @@ Validate the corpus and its readiness gate:
 ```bash
 python3 scripts/validate_corpus.py --require-core-ready \
   references/corpora/math-core.jsonl
+```
+
+Validate this branch's inherited core and domain overlay together:
+
+```bash
+python3 scripts/validate_corpus.py \
+  references/corpora/math-core.jsonl \
+  references/corpora/control-systems.jsonl
 ```
 
 Run the test suite:
