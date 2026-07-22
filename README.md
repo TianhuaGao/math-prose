@@ -288,7 +288,7 @@ influence evidence, and observation locators.
 
 This branch keeps the 50-source core above and adds 2 field-specific anchors
 with 8 localized observations. The combined evidence base therefore contains
-52 sources and 210 observations; the overlay supplements the 31 core patterns
+52 sources and 217 observations; the overlay supplements the 31 core patterns
 without promoting control-specific semantics into the transferable layer.
 
 - Rafal Goebel, Ricardo G. Sanfelice, Andrew R. Teel. [*Hybrid Dynamical Systems*](https://hybrid.soe.ucsc.edu/biblio/2009/hybrid-dynamical-systems). IEEE Control Systems Magazine, 2009. — `survey-or-guide`
