@@ -188,17 +188,17 @@ See the full
 
 The core corpus currently contains:
 
-- **51 influential anchors**: 26 research articles, 22 classic or established
-  textbooks, 2 research monographs, and 1 survey or guide, plus 1 comparison
+- **54 influential anchors**: 26 research articles, 22 classic or established
+  textbooks, 4 research monographs, and 2 surveys or guides, plus 1 comparison
   source retained for a corrected-proof boundary;
-- **231 localized, paraphrased prose observations**;
+- **267 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- **194 reusable construction frames**, **156 misuse boundaries**, and
-  **20 evidence-linked boundary cases** across those patterns;
-- 14 anchors in optimization and numerical analysis, 13 in pure mathematics,
-  and 12 each in applied mathematics and probability and statistics.
+- **231 reusable construction frames**, **185 misuse boundaries**, and
+  **44 evidence-linked boundary cases** across those patterns;
+- 15 anchors in optimization and numerical analysis, and 13 each in pure
+  mathematics, applied mathematics, and probability and statistics.
 
 Research articles provide evidence for publication-state compression, while
 textbooks and the research monographs provide fuller evidence for definitions,
@@ -215,6 +215,13 @@ or mathematically inapplicable. High-risk boundaries additionally carry
 counterexample, misuse, or near-synonym cases linked to observations, forward
 evaluations, or both.
 
+The latest expansion adds explicit evidence and misuse boundaries for
+frequentist coverage, significance, and power; convergence and analytic
+interchange conditions; weak, strong, and classical PDE solution claims; and
+conditioning, stability, error estimators, and observed numerical rates. It
+does not infer general estimator consistency or identifiability from the
+model-selection-consistency evidence currently present.
+
 Explore the
 [core corpus](references/corpora/math-core.jsonl) and the
 [corpus construction method](references/corpus-method.md).
@@ -226,7 +233,7 @@ barrier-function, and predictive-control semantics into the transferable core.
 ## Corpus Sources
 
 The list below is the complete source registry for the current core corpus:
-51 anchors and 1 comparison source.
+54 anchors and 1 comparison source.
 Each entry links to the stable access or metadata page recorded in the corpus;
 the JSONL registry remains authoritative for editions, access constraints,
 influence evidence, and observation locators.
@@ -241,6 +248,7 @@ influence evidence, and observation locators.
 - Richard Jordan, David Kinderlehrer, Felix Otto. [*The Variational Formulation of the Fokker–Planck Equation*](https://doi.org/10.1137/S0036141096303359). SIAM Journal on Mathematical Analysis, 1998. — `research-article`
 - David J. C. MacKay. [*Information Theory, Inference, and Learning Algorithms*](https://www.inference.org.uk/mackay/itila/book.html). Cambridge University Press, 2003. — `textbook`
 - Emmanuel J. Candès, Justin Romberg, Terence Tao. [*Robust Uncertainty Principles: Exact Signal Reconstruction from Highly Incomplete Frequency Information*](https://arxiv.org/abs/math/0409186). IEEE Transactions on Information Theory, 2006. — `research-article`
+- Terence Tao. [*Nonlinear Dispersive Equations: Local and Global Analysis*](https://bookstore.ams.org/cbms-106). American Mathematical Society, 2006. — `research-monograph`
 - Lawrence C. Evans. [*Partial Differential Equations*](https://bookstore.ams.org/gsm-19-r). American Mathematical Society, 2010. — `textbook`
 - Gerald Teschl. [*Ordinary Differential Equations and Dynamical Systems*](https://www.mat.univie.ac.at/~gerald/ftp/book-ode/index.html). American Mathematical Society, 2012. — `textbook`
 - Karl Johan Åström, Richard M. Murray. [*Feedback Systems: An Introduction for Scientists and Engineers*](https://fbswiki.org/wiki/index.php/Main_Page). Princeton University Press, 2021. — `textbook`
@@ -250,6 +258,7 @@ influence evidence, and observation locators.
 
 - Herbert Robbins, Sutton Monro. [*A Stochastic Approximation Method*](https://doi.org/10.1214/aoms/1177729586). Annals of Mathematical Statistics, 1951. — `research-article`
 - Y. E. Nesterov. [*A Method for Solving the Convex Programming Problem with Convergence Rate O(1/k^2)*](https://www.mathnet.ru/eng/dan46009). Soviet Mathematics Doklady, 1983. — `research-article`
+- Mark Ainsworth, J. Tinsley Oden. [*A Posteriori Error Estimation in Finite Element Analysis*](https://jtoden.oden.utexas.edu/wp-content/uploads/2013/06/1997-006.a_posteriori.pdf). Computer Methods in Applied Mechanics and Engineering, 1997. — `survey-or-guide`
 - Lloyd N. Trefethen, David Bau III. [*Numerical Linear Algebra*](https://people.maths.ox.ac.uk/trefethen/text.html). Society for Industrial and Applied Mathematics, 1997. — `textbook`
 - Douglas N. Arnold, Franco Brezzi, Bernardo Cockburn, L. Donatella Marini. [*Unified Analysis of Discontinuous Galerkin Methods for Elliptic Problems*](https://www-users.cse.umn.edu/~arnold/papers/dgerr.pdf). SIAM Journal on Numerical Analysis, 2002. — `research-article`
 - Nicholas J. Higham. [*Accuracy and Stability of Numerical Algorithms*](https://nhigham.com/accuracy-and-stability-of-numerical-algorithms/). Society for Industrial and Applied Mathematics, 2002. — `research-monograph`
@@ -274,6 +283,7 @@ influence evidence, and observation locators.
 - Charles M. Grinstead, J. Laurie Snell. [*Introduction to Probability*](https://math.dartmouth.edu/~prob/prob/prob.pdf). American Mathematical Society, 1997. — `textbook`
 - Patrick Billingsley. [*Probability and Measure*](https://www.wiley-vch.de/en/areas-interest/mathematics-statistics/statistics-16st/probability-mathematical-statistics-16st1/probability-and-measure-978-1-118-12237-2). John Wiley & Sons, 2012. — `textbook`
 - Matthew D. Hoffman, Andrew Gelman. [*The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo*](https://jmlr.org/papers/v15/hoffman14a.html). Journal of Machine Learning Research, 2014. — `research-article`
+- Bradley Efron, Trevor Hastie. [*Computer Age Statistical Inference: Algorithms, Evidence, and Data Science*](https://www.cambridge.org/core/books/computer-age-statistical-inference/E32C1911ED937D75CE159BBD21684D37). Cambridge University Press, 2016. — `research-monograph`
 - David A. Levin, Yuval Peres, Elizabeth L. Wilmer. [*Markov Chains and Mixing Times*](https://pages.uoregon.edu/dlevin/MARKOV/). American Mathematical Society, 2017. — `textbook`
 - Rick Durrett. [*Probability: Theory and Examples*](https://www.cambridge.org/core/books/probability/DD9A1907F810BB14CCFF022CDFC5677A). Cambridge University Press, 2019. — `textbook`
 - Simo Särkkä, Arno Solin. [*Applied Stochastic Differential Equations*](https://www.cambridge.org/core/books/applied-stochastic-differential-equations/6BB1B8B0819F8C12616E4A0C78C29EAA). Cambridge University Press, 2019. — `textbook`
@@ -300,11 +310,12 @@ influence evidence, and observation locators.
 
 ### Control Systems Domain Overlay
 
-This branch keeps the 52-source core registry above and adds 3 field-specific
+This branch keeps the 55-source core registry above and adds 3 field-specific
 anchors with 15 localized observations and 2 validated domain patterns. The
-combined evidence base therefore contains 55 sources and 246 observations;
-control-specific flow/jump, barrier-function, and predictive-control semantics
-remain outside the transferable core.
+combined evidence base therefore contains 58 sources, 282 observations,
+33 validated patterns, 242 constructions, 195 boundaries, and 49 boundary
+cases; control-specific flow/jump, barrier-function, and predictive-control
+semantics remain outside the transferable core.
 
 - Rafal Goebel, Ricardo G. Sanfelice, Andrew R. Teel. [*Hybrid Dynamical Systems*](https://hybrid.soe.ucsc.edu/biblio/2009/hybrid-dynamical-systems). IEEE Control Systems Magazine, 2009. — `survey-or-guide`
 - Aaron D. Ames, Xiangru Xu, Jessy W. Grizzle, Paulo Tabuada. [*Control Barrier Function Based Quadratic Programs for Safety Critical Systems*](https://authors.library.caltech.edu/records/jnhr0-1ww05). IEEE Transactions on Automatic Control, 2017. — `research-article`
@@ -324,6 +335,8 @@ math-prose/
 │   ├── core-evaluation.md           # Forward-test record
 │   ├── core-evaluation-round5-artifacts.md
 │   │                                # Boundary-composition test artifacts
+│   ├── core-evaluation-round6-artifacts.md
+│   │                                # Inference and analysis boundary tests
 │   ├── control-systems-evaluation.md
 │   │                                # Domain-overlay forward tests
 │   └── corpora/

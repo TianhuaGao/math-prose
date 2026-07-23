@@ -124,3 +124,37 @@ were re-audited successfully. This correction remains visible in the
 The round supports the newly evidence-linked high-risk boundaries and long-chain
 composition checks. It does not establish completeness across every structure,
 subfield, or domain overlay.
+
+## 2026-07-24 inference and analysis boundary tests
+
+The sixth round targeted four newly expanded areas. Four fresh writing runs
+received mathematical contracts without model answers, and independent
+reviewers audited the resulting prose.
+
+| Case | Area | Required boundary | Result |
+|---|---|---|---|
+| CF6-1 | Frequentist inference | separate procedure coverage, realized interval, p-value, prespecified level, and power at a named alternative | PASS |
+| CF6-2 | Measure convergence and analytic interchange | separate a.e. and \(L^1\) convergence; state complete theorem hypotheses; distinguish an unavailable interchange license from impossibility | PASS after two rule repairs and a strictly blind rerun |
+| CF6-3 | PDE solution classes | retain weak formulation, trace semantics, local a.e. regularity, time topology, and continuous dependence before well-posedness | PASS |
+| CF6-4 | Numerical analysis | separate conditioning and stability, forward and backward error, a priori and a posteriori claims, error sources, and observed versus proved rates without inventing a canonical setting | PASS after a formula-supplied strictly blind rerun |
+
+The initial CF6-2 output omitted measure-space and measurability details and
+overstated the consequence of missing Tonelli/Fubini hypotheses. Its first
+repair still omitted the product domain and parameter-uniform derivative
+envelope. Both failures were retained, the corresponding guards were
+strengthened, and the final strictly blind output passed exact-text review.
+One intended rerun was discarded because its writer voluntarily disclosed
+opening this evaluation record. A later abbreviated review input was also
+marked invalid and replaced by review of the exact output.
+
+The initial CF6-4 output preserved the requested distinctions but invented a
+linear-system perturbation model and finite-element formulas that its
+category-level prompt had not supplied. The new guard requires symbolic or
+conditional prose when those inputs are missing. A strictly blind rerun
+received the exact formulas and preserved them without adding another setting;
+an abbreviated first re-audit was marked invalid, and exact contract-to-output
+review passed.
+
+The prompts, outputs, self-audits, failures, repair history, and independent
+reviews are preserved in the
+[round-six artifact record](core-evaluation-round6-artifacts.md).

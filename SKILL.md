@@ -108,6 +108,28 @@ Run the relevant checks when several mathematical actions occur in one passage:
 - Preserve initialization sources, sequential versus simultaneous update
   order, acceptance branches, tolerances, and stopping conditions in algorithm
   prose. Do not add an update or guarantee that was not supplied.
+- In statistical inference, separate confidence coverage, realized intervals,
+  p-values, prechosen test levels, type-I and type-II error probabilities, and
+  power. Do not turn a frequentist probability into a posterior probability.
+- Before interchanging limits, integrals, expectations, derivatives, or
+  iterated integrals, name the theorem and verify the ambient measure-space,
+  measurability, definedness of the displayed operations, and branch-specific
+  domination, monotonicity, integrability, or regularity hypotheses. For a
+  parameter-dependent integral, make any local parameter neighborhood and
+  integrable spatial envelope uniform over that neighborhood explicit. Missing
+  hypotheses show that the named theorem does not license the step; they do
+  not by themselves prove the interchange impossible.
+- For PDEs, retain the source's classical, strong, weak, distributional, or
+  viscosity solution notion, including its function space, test class, trace
+  interpretation, and sense of equality. Use `well posed` only when existence,
+  uniqueness, and continuous dependence are all stated in named topologies.
+- In numerical analysis, separate problem conditioning from algorithmic
+  stability, forward from backward error, a priori from a posteriori
+  estimates, and proved rates from finite-run observed slopes. Keep
+  discretization, algebraic-solve, and rounding errors distinct. If only these
+  categories are supplied, keep the prose symbolic or conditional; do not
+  instantiate a canonical linear system, finite-element estimate, norm,
+  perturbation model, or estimator formula that the input did not provide.
 
 ## Revision Modes
 
