@@ -219,9 +219,9 @@ Explore the
 [core corpus](references/corpora/math-core.jsonl) and the
 [corpus construction method](references/corpus-method.md).
 The [`domain/control-systems`](https://github.com/TianhuaGao/math-prose/tree/domain/control-systems)
-branch adds 2 reviewed control-systems anchors and 8 localized observations
-without mixing field-specific flow/jump and barrier-function semantics into
-the transferable core.
+branch adds 3 reviewed control-systems anchors, 15 localized observations, and
+2 validated domain patterns without mixing field-specific flow/jump,
+barrier-function, and predictive-control semantics into the transferable core.
 
 ## Corpus Sources
 
