@@ -118,6 +118,28 @@ Separate the governing law, initial condition, and interpretation:
 Do not write `is initialized as` when the code or model actually initializes
 from a measured state, a distribution, or a previous iterate.
 
+### Weak or generalized PDE formulation
+
+Introduce the solution notion before the display, then make the function space,
+test class, and sense of equality visible:
+
+> Seek \(u\in H^1_0(U)\) such that
+> \[
+> a(u,v)=\ell(v)\qquad\text{for every }v\in H^1_0(U).
+> \]
+
+Do not replace a Sobolev trace condition by pointwise boundary equality unless
+the required representative or regularity is available. Likewise, do not
+rotate among `classical`, `strong`, `weak`, `distributional`, and `viscosity`
+as stylistic variants. If a regularity theorem upgrades one notion, state its
+hypotheses and whether the conclusion is interior, up to the boundary, almost
+everywhere, or pointwise.
+
+For an evolution equation, separate the governing relation from the topology
+in which the initial datum is attained. Essential boundedness in time and
+continuity into the state space support different statements at an individual
+time.
+
 ### Optimization problem
 
 Identify all mathematical roles:
@@ -136,6 +158,30 @@ be attained, and an `argmin` may be empty or contain several points.
 Stationarity alone does not imply optimality outside its stated hypotheses;
 KKT conclusions must retain the convexity, constraint-qualification, and other
 conditions supplied by the relevant theorem.
+
+### Numerical approximation and error statement
+
+Introduce the continuous problem, discrete space, and approximation parameter
+before reporting an error:
+
+> Let \(u_h\in V_h\) denote the discrete solution on a shape-regular mesh.
+> Under the stated consistency, stability, approximation, and regularity
+> assumptions, the a priori estimate gives ...
+
+Say whether the discrete problem is assumed to be solved exactly. If the
+linear or nonlinear solve is inexact, keep its algebraic error separate from
+the continuous-to-discrete error. Distinguish a theoretical a priori rate from
+a computable a posteriori estimator, and distinguish both from an empirical
+slope observed over finitely many refinements or iterations.
+
+For finite-precision computations, keep problem conditioning separate from
+algorithmic stability and keep forward, backward, residual, and rounding errors
+named by their actual comparison objects.
+
+Do not manufacture a familiar model to make a qualitative prompt look
+concrete. If no linear system, finite-element space, norm, estimator inequality,
+oscillation term, or error decomposition is supplied, retain placeholders or
+state the distinctions without formulas.
 
 ### Piecewise or case definition
 

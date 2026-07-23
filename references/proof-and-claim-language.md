@@ -105,6 +105,101 @@ Keep probability modes explicit:
   an almost-sure one; an argument such as summability plus Borel--Cantelli is
   needed for the latter.
 
+## Statistical inference
+
+Keep the probability-bearing object and reference distribution explicit.
+
+- A frequentist confidence level describes repeated-sampling coverage of a
+  random interval procedure. After the data are observed, it does not assign a
+  posterior probability to the fixed parameter unless a Bayesian model is
+  separately supplied.
+- A p-value is evaluated under a specified null model. Keep it distinct from a
+  prechosen significance level, the probability of rejecting a true null, the
+  probability of missing a specified alternative, and power under that
+  alternative.
+- `Statistically significant` does not mean that an effect is large,
+  practically important, causal, or certain. Name the estimand, population,
+  test direction, multiplicity adjustment, and validation regime that support
+  the reported inference.
+- State exactly what is consistent and which error probability, norm, or event
+  tends to its limit. Model-selection consistency is neither finite-sample
+  correctness nor estimator unbiasedness.
+- An asymptotic distribution supplies a large-sample approximation. Do not
+  report it as an exact finite-sample law without a separate result.
+
+## Interchanging analytic operations
+
+Treat every interchange as a theorem application, not as typographic
+reordering.
+
+- For monotone convergence, retain nonnegativity and monotone increase.
+- For dominated convergence on the stated measure space, retain measurability,
+  almost-everywhere convergence, and one measurable integrable envelope that
+  dominates the whole sequence almost everywhere.
+- For iterated integrals, name the two measure spaces and the product-space
+  measurability assumptions. Distinguish the nonnegative Tonelli branch from
+  the absolute-integrability condition used for signed functions; if discussing
+  two existing iterated integrals outside those branches, first ensure that the
+  displayed integrals are meaningful.
+- For differentiation under an integral, state the parameter neighborhood and
+  an integrable spatial envelope that bounds the derivative uniformly over
+  that neighborhood, or give the other theorem-specific conditions actually
+  used.
+- If a theorem's hypotheses are unavailable, conclude only that the theorem
+  does not license the interchange. Do not declare the operation impossible or
+  insist on the original order unless a separate argument establishes that
+  stronger claim.
+- Almost-everywhere or in-measure convergence does not alone imply
+  \(L^p\)-convergence or convergence of expectations. State the norm,
+  domination, or uniform-integrability condition that supplies the upgrade.
+- Tightness prevents probability mass from escaping; uniform integrability
+  controls first-moment tails. Do not substitute one for the other.
+
+## PDE solution concepts
+
+Solution labels are mathematical contracts, not stylistic alternatives.
+
+- Name the equation, spatial and temporal function spaces, test class, and
+  whether the equation holds pointwise, almost everywhere, weakly,
+  distributionally, through an integral formulation, or in the viscosity
+  sense.
+- A classical-to-generalized implication is normally one-way. A converse needs
+  a regularity theorem with its operator, coefficient, data, interior or
+  boundary, and topology assumptions intact.
+- For Sobolev solutions on domains and spaces covered by an applicable trace
+  theorem, formulate boundary data with its trace operator. Otherwise retain
+  the supplied zero-trace closure space or weak boundary formulation.
+  Pointwise boundary values require additional representative regularity.
+- For evolution equations, state the topology in which the initial datum is
+  attained. Essential boundedness in time does not by itself provide
+  every-time equality in the state space.
+- `Well posed` requires existence, uniqueness in a named solution class, and
+  continuous dependence in stated data and solution topologies.
+
+## Numerical error and rate claims
+
+- Conditioning describes sensitivity of the mathematical problem; stability
+  describes how an algorithm propagates data and rounding perturbations.
+- Forward error compares computed and exact outputs. Backward error measures a
+  perturbation of the input that makes the computed output exact. A small
+  backward error gives a small forward error only through a conditioning
+  result.
+- An a priori estimate states a theoretical bound or rate and may involve
+  exact-solution regularity. An a posteriori estimator must be computable from
+  the discrete solution and data; state its reliability, efficiency, or
+  effectivity result when available.
+- Keep discretization, algebraic-solve, residual-evaluation, and rounding
+  errors separate until an explicit total-error decomposition combines them.
+- Consistency, stability, approximation, and convergence are separate
+  properties. Invoke the applicable theorem rather than inferring convergence
+  from one property alone.
+- A fitted finite-run slope is empirical evidence. State a proved asymptotic or
+  worst-case rate separately with its norm, constants, and hypotheses.
+- Category-level facts do not license a canonical example. If the input omits
+  the problem, norm, perturbation model, estimator bounds, or decomposition,
+  use conditional or symbol-free prose rather than supplying a standard linear
+  system or finite-element formula from background knowledge.
+
 ## Mathematical and empirical evidence
 
 Keep evidence modes distinct:
