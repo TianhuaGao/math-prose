@@ -33,19 +33,19 @@ For every case, record:
 | `A0` | State identity, property, or status | `$x$ is ...`, `$x$ equals ...`, `$f$ is continuous`, `$A$ is symmetric` | A form of `be` is often optimal. Do not force an active verb into a property statement. |
 | `A1` | Assign a symbol or name | `let $x$ denote ...`, `denote ... by $x$`, `write $x$ for ...` | Naming does not define the object's internal formula. Keep denotation direction correct. |
 | `A2` | Stipulate a definition | `define $x:=...$`, `define $F$ by ...`, `$x$ is defined as ...` | Use only when the manuscript creates or adopts the definition. |
-| `A3` | Declare type, space, or membership | `$x\in\mathcal X$`, `$x$ lies in ...`, `$F:\mathcal X\to\mathcal Y$` | Give the actual space or signature. A physical description is not a type declaration. |
+| `A3` | Declare type, space, or membership | `$x\in\mathcal X$`, `$x$ lies in ...`, `$F:\mathcal X\to\mathcal Y$`, `$S:\mathcal X\rightrightarrows\mathcal U$` | Give the actual space or signature and distinguish single-valued from set-valued maps. A physical description is not a type declaration. |
 | `A4` | Introduce data or assumptions | `given ...`, `suppose ...`, `assume ...`, `for a prescribed ...`, `under ...` | `Given` introduces available data or conditions. It is not a synonym for `defined`. |
-| `A5` | Establish scope or quantification | `for every ...`, `there exists ...`, `fix ...`, `choose ...`, `for $i=1,\ldots,n$` | Preserve quantifier order and dependence. `Choose` may require a preceding existence result. |
+| `A5` | Establish scope or quantification | `for every ...`, `there exists ...`, `fix ...`, `choose ...`, `for $i=1,\ldots,n$` | Preserve quantifier order and state dependencies, such as whether $C(\alpha)$ is uniform in $u$ and $n$. `Choose` may require a preceding existence result. |
 
 ## B. Representation and construction
 
 | Code | Behavior | Licensed constructions | Boundary |
 |---|---|---|---|
-| `B1` | Supply an explicit formula | `$x$ is given by ...`, `$x$ takes the form ...`, `$x$ can be written as ...` | The object is already identified. `Can be written as` asserts an admissible representation, usually an equivalence. |
+| `B1` | Supply an explicit formula | `$x$ is given by ...`, `$x$ takes the form ...`, `$x$ can be written as ...` | The object is already identified. `Can be written as` asserts an admissible representation, usually an equivalence. Piecewise formulas need exhaustive, nonambiguous cases. |
 | `B2` | Construct or assemble an object | `construct`, `form`, `assemble`, `augment`, `stack` | Name the operation that actually creates the object and preserve ordering. |
-| `B3` | Map or transform | `maps ... to ...`, `transforms`, `pushes forward`, `pulls back`, `associates ... with ...` | State direction, domain, codomain, and frame when relevant. |
+| `B3` | Map or transform | `maps ... to ...`, `transforms`, `pushes forward`, `pulls back`, `associates ... with ...` | State direction, domain, codomain, and frame when relevant. For quotient-induced maps, verify representative independence; for set-valued inverses, retain set-valuedness. |
 | `B4` | Decompose or factor | `decompose ... into`, `factor`, `split`, `separate`, `expand in ...` | The pieces and reconstruction relation must be valid and complete. |
-| `B5` | Normalize or project | `normalize`, `project onto`, `restrict to`, `embed in` | State nonzero, feasibility, uniqueness, and singular-case conditions. |
+| `B5` | Normalize or project | `normalize`, `project onto`, `restrict to`, `embed in` | State nonzero, feasibility, existence, uniqueness, and singular-case conditions. Distinguish a general metric projection from an orthogonal projection onto a subspace. |
 | `B6` | Parameterize or index | `parameterize by`, `index by`, `enumerate`, `associate the parameter ...` | Distinguish a parameterization from a mere dependency or label. |
 
 ## C. Transformation and equivalence
@@ -63,10 +63,10 @@ For every case, record:
 | Code | Behavior | Licensed constructions | Boundary |
 |---|---|---|---|
 | `D1` | Obtain by calculation | `obtain`, `derive`, `compute`, `evaluate`, `integration gives` | A reproducible calculation or cited formula must support the result. |
-| `D2` | Draw a logical consequence | `implies`, `hence`, `therefore`, `we deduce`, `it follows that` | Require a valid implication from stated premises. These are not rhythm words. |
-| `D3` | Establish or prove | `show`, `establish`, `prove`, `demonstrate analytically` | Match the verb to the argument. Numerical evidence does not prove a theorem. |
-| `D4` | State a bound or order relation | `is bounded by`, `does not exceed`, `dominates`, `is monotone`, `satisfies` | Preserve strictness, norm, probability, uniformity, and constant dependence. |
-| `D5` | Assert existence or uniqueness | `there exists`, `admits`, `has a unique`, `is well posed` | Identify the domain and hypotheses. Construction may establish existence but not automatically uniqueness. |
+| `D2` | Draw a logical consequence | `implies`, `hence`, `therefore`, `we deduce`, `it follows that` | Require a valid implication from stated premises and retain the hypotheses that license it. These are not rhythm words. |
+| `D3` | Establish or prove | `show`, `establish`, `prove`, `demonstrate analytically` | Match the verb and architecture to the argument: induction needs both stages, equivalence both directions, cases full coverage, and contradiction an explicit conflict. Numerical evidence does not prove a theorem. |
+| `D4` | State a bound or order relation | `is bounded by`, `does not exceed`, `dominates`, `is monotone`, `satisfies` | Preserve strictness, norm, probability level, uniformity, and constant dependence. A high-probability bound is not an almost-sure statement. |
+| `D5` | Assert existence or uniqueness | `there exists`, `admits`, `has a unique`, `is well posed` | Identify the domain and hypotheses. An infimum or displayed `argmin` does not establish attainment; construction may establish existence but not automatically uniqueness. |
 
 ## E. Dynamics and computation
 
@@ -75,8 +75,8 @@ For every case, record:
 | `E1` | Describe evolution or governing law | `evolves according to`, `obeys`, `is governed by`, `satisfies the dynamics` | Preserve continuous or discrete time, frame, and initial conditions. |
 | `E2` | Initialize or reset | `initialize at`, `set initially to`, `reset to`, `start from` | Distinguish a fixed default from state-dependent initialization. |
 | `E3` | Update or recur | `update by`, `iterate`, `propagate`, `integrate`, `obeys the recurrence` | State update order, index, sampling interval, and simultaneous or sequential semantics. |
-| `E4` | Optimize or select | `minimize`, `maximize`, `solve for`, `select`, `choose to satisfy` | State decision variables, objective, constraints, and existence assumptions. |
-| `E5` | Converge or stabilize | `converges to`, `approaches`, `remains invariant`, `is asymptotically stable` | Preserve topology, mode of convergence, rate, locality, probability, and stability definition. |
+| `E4` | Optimize or select | `minimize`, `maximize`, `solve for`, `select`, `choose to satisfy` | State decision variables, objective, constraints, and existence assumptions. Separate feasibility, stationarity, attainment, optimality, duality, and KKT conclusions. |
+| `E5` | Converge or stabilize | `converges to`, `approaches`, `remains invariant`, `is asymptotically stable` | Preserve topology, mode of convergence, rate, locality, probability, and stability definition. Do not conflate distributional, probabilistic, or almost-sure convergence. |
 
 ## F. Interpretation and comparison
 
@@ -84,8 +84,8 @@ For every case, record:
 |---|---|---|---|
 | `F1` | Explain semantic or physical role | `represents`, `encodes`, `collects`, `measures`, `captures` | These verbs explain role. They do not assert equality, causation, or sufficiency. |
 | `F2` | Explain dependency or sensitivity | `depends on`, `is parameterized by`, `varies with`, `is invariant under` | Separate functional dependence from empirical correlation or causal influence. |
-| `F3` | Compare mathematical objects | `coincides with`, `differs from`, `dominates`, `is equivalent to`, `generalizes` | Name the comparison criterion and preserve direction. `Generalizes` requires recovery of the narrower case. |
-| `F4` | Interpret a formula or result | `shows that`, `indicates`, `means that`, `corresponds to`, `reveals` | Do not strengthen a formal result beyond its assumptions or turn an illustration into proof. |
+| `F3` | Compare mathematical objects | `coincides with`, `differs from`, `dominates`, `is equivalent to`, `generalizes` | Name the comparison criterion, scope, and direction. A special case is not equivalence, and a finite benchmark does not establish universal superiority. |
+| `F4` | Interpret a formula or result | `shows that`, `indicates`, `means that`, `corresponds to`, `reveals` | Do not strengthen a formal result beyond its assumptions or turn an illustration into proof. Mark invalidated proof steps as superseded when an erratum supplies the current evidence. |
 
 ## Local variation rules
 

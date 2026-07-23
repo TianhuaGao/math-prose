@@ -84,10 +84,13 @@ SECTION_ROLES = {
     "algorithm",
     "experiment-or-results",
     "discussion-or-limitations",
-    "appendix",
 }
 
+SECTION_LOCATIONS = {"main-text", "appendix", "supplement"}
+
 STATUSES = {"seed", "provisional", "validated"}
+
+BOUNDARY_CASE_TYPES = {"mathematical-counterexample", "misuse", "near-synonym"}
 
 REQUIRED = {
     "source": {
@@ -178,16 +181,133 @@ def check_enum(record: dict[str, Any], field: str, allowed: set[str], errors: li
         )
 
 
+def validate_boundary_cases(
+    pattern: dict[str, Any],
+    observations: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> None:
+    """Validate optional, pattern-local misuse and counterexample evidence."""
+    if "boundary_cases" not in pattern:
+        return
+
+    cases = pattern.get("boundary_cases")
+    if not isinstance(cases, list) or not cases:
+        errors.append(
+            f"{pattern['_location']}: boundary_cases must be a non-empty list of objects"
+        )
+        return
+
+    boundaries = pattern.get("boundaries", [])
+    source_ids = pattern.get("source_ids", [])
+    seen_cases: set[tuple[str, str]] = set()
+    for index, case in enumerate(cases, start=1):
+        case_location = f"{pattern['_location']}: boundary_cases[{index}]"
+        if not isinstance(case, dict):
+            errors.append(f"{case_location} must be an object")
+            continue
+
+        required = {"case_type", "boundary", "challenge", "safe_response"}
+        missing = sorted(required - case.keys())
+        if missing:
+            errors.append(
+                f"{case_location} missing required fields: {', '.join(missing)}"
+            )
+        if case.get("case_type") not in BOUNDARY_CASE_TYPES:
+            errors.append(
+                f"{case_location}: unsupported case_type={case.get('case_type')!r}; "
+                f"expected one of {sorted(BOUNDARY_CASE_TYPES)}"
+            )
+        for field in ("boundary", "challenge", "safe_response"):
+            if not isinstance(case.get(field), str) or not case[field].strip():
+                errors.append(f"{case_location}: {field} must be a non-empty string")
+
+        boundary = case.get("boundary")
+        if isinstance(boundaries, list) and boundary not in boundaries:
+            errors.append(
+                f"{case_location}: boundary must exactly match one parent pattern boundary"
+            )
+        if isinstance(boundary, str) and isinstance(case.get("challenge"), str):
+            normalized_case = (
+                " ".join(boundary.split()).casefold(),
+                " ".join(case["challenge"].split()).casefold(),
+            )
+            if normalized_case in seen_cases:
+                errors.append(f"{case_location}: duplicate boundary case")
+            else:
+                seen_cases.add(normalized_case)
+
+        evidence_present = False
+        for field in ("observation_ids", "evaluation_ids"):
+            if field not in case:
+                continue
+            value = case.get(field)
+            if (
+                not isinstance(value, list)
+                or not value
+                or not all(isinstance(item, str) and item.strip() for item in value)
+            ):
+                errors.append(
+                    f"{case_location}: {field} must be a non-empty list of non-empty strings"
+                )
+                continue
+            evidence_present = True
+            if len(value) != len(set(value)):
+                errors.append(f"{case_location}: {field} contains duplicate entries")
+
+        if not evidence_present:
+            errors.append(
+                f"{case_location}: at least one of observation_ids or evaluation_ids "
+                "must provide evidence"
+            )
+
+        observation_ids = case.get("observation_ids", [])
+        if isinstance(observation_ids, list):
+            for observation_id in observation_ids:
+                if not isinstance(observation_id, str):
+                    continue
+                observation = observations.get(observation_id)
+                if observation is None:
+                    errors.append(
+                        f"{case_location}: unknown observation_id {observation_id!r}"
+                    )
+                    continue
+                observation_behaviors = {observation.get("behavior")}
+                secondary_behaviors = observation.get("secondary_behaviors", [])
+                if isinstance(secondary_behaviors, list):
+                    observation_behaviors.update(secondary_behaviors)
+                if pattern.get("behavior") not in observation_behaviors:
+                    errors.append(
+                        f"{case_location}: observation {observation_id!r} has behaviors "
+                        f"{sorted(behavior for behavior in observation_behaviors if behavior)!r}, "
+                        f"expected {pattern.get('behavior')!r}"
+                    )
+                if (
+                    isinstance(source_ids, list)
+                    and observation.get("source_id") not in source_ids
+                ):
+                    errors.append(
+                        f"{case_location}: observation {observation_id!r} comes from "
+                        "a source not listed in the parent pattern source_ids"
+                    )
+
+
 def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> list[str]:
     records = list(records)
     errors = list(initial_errors)
     ids: dict[str, str] = {}
     sources: dict[str, dict[str, Any]] = {}
-    observed_pairs = {
-        (record.get("source_id"), record.get("behavior"))
-        for record in records
-        if record.get("record_type") == "observation"
-    }
+    observations: dict[str, dict[str, Any]] = {}
+    observed_pairs: set[tuple[Any, Any]] = set()
+    for record in records:
+        if record.get("record_type") != "observation":
+            continue
+        observed_pairs.add((record.get("source_id"), record.get("behavior")))
+        secondary_behaviors = record.get("secondary_behaviors", [])
+        if isinstance(secondary_behaviors, list):
+            observed_pairs.update(
+                (record.get("source_id"), behavior)
+                for behavior in secondary_behaviors
+            )
 
     for record in records:
         location = record["_location"]
@@ -207,6 +327,8 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
             ids[record_id] = location
             if record_type == "source":
                 sources[record_id] = record
+            elif record_type == "observation":
+                observations[record_id] = record
 
     for record in records:
         record_type = record.get("record_type")
@@ -237,6 +359,33 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
             check_enum(record, "formula_form", FORMULA_FORMS, errors)
             check_enum(record, "claim_strength", CLAIM_STRENGTHS, errors)
             check_enum(record, "section_role", SECTION_ROLES, errors)
+            if "section_location" in record:
+                check_enum(
+                    record, "section_location", SECTION_LOCATIONS, errors
+                )
+            if "secondary_behaviors" in record:
+                secondary_behaviors = record.get("secondary_behaviors")
+                require_string_list(record, "secondary_behaviors", errors)
+                if isinstance(secondary_behaviors, list):
+                    unsupported = sorted(
+                        behavior
+                        for behavior in secondary_behaviors
+                        if behavior not in BEHAVIORS
+                    )
+                    if unsupported:
+                        errors.append(
+                            f"{record['_location']}: unsupported secondary_behaviors: "
+                            f"{', '.join(unsupported)}"
+                        )
+                    if record.get("behavior") in secondary_behaviors:
+                        errors.append(
+                            f"{record['_location']}: secondary_behaviors must not repeat "
+                            "the primary behavior"
+                        )
+            if "conditions" in record:
+                require_string_list(
+                    record, "conditions", errors, normalize_duplicates=True
+                )
             source = sources.get(record.get("source_id"))
             if source is None:
                 errors.append(f"{record['_location']}: unknown source_id {record.get('source_id')!r}")
@@ -316,6 +465,7 @@ def validate(records: Iterable[dict[str, Any]], initial_errors: list[str]) -> li
                         f"{record['_location']}: provisional patterns require at least one anchor source "
                         f"from the same corpus layer"
                     )
+            validate_boundary_cases(record, observations, errors)
 
     return errors
 
@@ -392,6 +542,10 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         record.get("section_role") for record in records
         if record.get("record_type") == "observation" and record.get("section_role")
     )
+    section_locations = Counter(
+        record.get("section_location") for record in records
+        if record.get("record_type") == "observation" and record.get("section_location")
+    )
     statuses = Counter(
         record.get("status") for record in records
         if record.get("record_type") == "pattern" and record.get("status")
@@ -405,6 +559,43 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         len(record.get("boundaries", [])) for record in records
         if record.get("record_type") == "pattern"
         and isinstance(record.get("boundaries"), list)
+    )
+    patterns_with_boundary_cases = sum(
+        1 for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundary_cases"), list)
+        and record.get("boundary_cases")
+    )
+    boundary_cases = sum(
+        len(record.get("boundary_cases", [])) for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundary_cases"), list)
+    )
+    mapped_boundaries = sum(
+        len({
+            case.get("boundary")
+            for case in record.get("boundary_cases", [])
+            if isinstance(case, dict) and isinstance(case.get("boundary"), str)
+        })
+        for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundary_cases"), list)
+    )
+    observation_links = sum(
+        len(case.get("observation_ids", []))
+        for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundary_cases"), list)
+        for case in record.get("boundary_cases", [])
+        if isinstance(case, dict) and isinstance(case.get("observation_ids"), list)
+    )
+    evaluation_links = sum(
+        len(case.get("evaluation_ids", []))
+        for record in records
+        if record.get("record_type") == "pattern"
+        and isinstance(record.get("boundary_cases"), list)
+        for case in record.get("boundary_cases", [])
+        if isinstance(case, dict) and isinstance(case.get("evaluation_ids"), list)
     )
     type_summary = ", ".join(f"{key}={value}" for key, value in sorted(types.items())) or "none"
     behavior_summary = ", ".join(f"{key}={value}" for key, value in sorted(behaviors.items())) or "none"
@@ -423,6 +614,9 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
     section_summary = ", ".join(
         f"{key}={value}" for key, value in sorted(section_roles.items())
     ) or "none"
+    section_location_summary = ", ".join(
+        f"{key}={value}" for key, value in sorted(section_locations.items())
+    ) or "none"
     status_summary = ", ".join(
         f"{key}={value}" for key, value in sorted(statuses.items())
     ) or "none"
@@ -434,7 +628,12 @@ def summarize(records: Iterable[dict[str, Any]]) -> str:
         f"source_genres: {source_genre_summary}\n"
         f"disciplines: {discipline_summary}\n"
         f"section_roles: {section_summary}\n"
+        f"section_locations: {section_location_summary}\n"
         f"pattern_inventory: constructions={construction_frames}, boundaries={boundary_rules}\n"
+        f"boundary_evidence: patterns={patterns_with_boundary_cases}, "
+        f"cases={boundary_cases}, mapped_boundaries={mapped_boundaries}, "
+        f"unmapped_boundaries={max(0, boundary_rules - mapped_boundaries)}, "
+        f"observation_links={observation_links}, evaluation_links={evaluation_links}\n"
         f"pattern_statuses: {status_summary}"
     )
 

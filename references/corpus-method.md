@@ -162,7 +162,10 @@ Annotate each observation on independent axes.
 
 Use one code from `behavior-taxonomy.md`, such as `A1` for naming, `B2` for
 construction, `C2` for equivalent rewriting, `D2` for logical inference, or
-`E3` for an update law.
+`E3` for an update law. Use optional `secondary_behaviors` only when the same
+event genuinely performs additional mathematical actions. Secondary behaviors
+may support pattern evidence, but they do not replace the primary
+classification.
 
 ### Discourse position
 
@@ -222,7 +225,18 @@ Use one of:
 - `algorithm`
 - `experiment-or-results`
 - `discussion-or-limitations`
-- `appendix`
+
+Record physical placement separately with optional `section_location`.
+Supported values are `main-text`, `appendix`, and `supplement`. An appendix may
+contain a proof, derivation, algorithm, or limitation; it is a location rather
+than a rhetorical role.
+
+### Conditions
+
+Use optional `conditions` for hypotheses, regimes, quantifier dependencies,
+nonzero requirements, existence assumptions, or sampling limits that control
+the observation. Keep them as short semantic statements rather than copied
+source prose.
 
 ### Discipline
 
@@ -295,6 +309,20 @@ Summarize observations into a behavior card with:
 9. contributing source identifiers;
 10. status: `seed`, `provisional`, or `validated`.
 
+For a high-risk boundary, add a `boundary_cases` entry that maps an exact
+string from `boundaries` to evidence:
+
+1. `case_type`: `mathematical-counterexample`, `misuse`, or `near-synonym`;
+2. `boundary`: an exact parent-boundary string;
+3. `challenge`: the tempting but unsafe strengthening or confusion;
+4. `safe_response`: the behavior the writer should preserve;
+5. one or both evidence channels: `observation_ids` and `evaluation_ids`.
+
+Every linked observation must share the pattern behavior, either as its primary
+behavior or in `secondary_behaviors`, and its source must occur in the pattern's
+`source_ids`. Boundary evidence makes a risky distinction auditable; it does
+not require every routine boundary to carry a test case.
+
 Report coverage counts by behavior, discipline, and section role. Do not rank a
 construction only by frequency. A frequent phrase may be vague, field-specific,
 or tied to one journal's style.
@@ -356,12 +384,13 @@ Required fields:
 ```
 
 Use optional `quote` only when redistribution is justified. The validator limits
-it to 25 words but cannot decide whether reuse is legally permitted.
+it to 25 words but cannot decide whether reuse is legally permitted. Optional
+fields include `secondary_behaviors`, `conditions`, and `section_location`.
 
 ### Pattern record
 
 Required fields:
 
 ```json
-{"id":"pat-example","record_type":"pattern","corpus_layer":"core","behavior":"C1","intent":"Introduce the result of a valid substitution.","constructions":["substituting ... into ... gives"],"boundaries":["Name the substituted relation and preserve its conditions."],"synthetic_example":"Substituting the stated relation into the governing equation gives the reduced form.","source_ids":["src-example"],"status":"provisional"}
+{"id":"pat-example","record_type":"pattern","corpus_layer":"core","behavior":"C1","intent":"Introduce the result of a valid substitution.","constructions":["substituting ... into ... gives"],"boundaries":["Name the substituted relation and preserve its conditions."],"boundary_cases":[{"case_type":"misuse","boundary":"Name the substituted relation and preserve its conditions.","challenge":"A rewrite drops a nonzero condition required by the substituted identity.","safe_response":"Retain the condition and restrict the resulting formula to its valid domain.","observation_ids":["obs-example"],"evaluation_ids":["CF5-example"]}],"synthetic_example":"Substituting the stated relation into the governing equation gives the reduced form.","source_ids":["src-example"],"status":"provisional"}
 ```

@@ -100,6 +100,10 @@ State direction before consequences:
 For frames and coordinate transforms, state what the map acts on and in which
 direction. A matrix label alone is insufficient when conventions differ.
 
+For a set-valued map \(S:\mathcal X\rightrightarrows\mathcal U\), define images,
+inverse images, and the graph as sets. Before defining a map on equivalence
+classes, verify that the proposed value is independent of the representative.
+
 ### Dynamical system
 
 Separate the governing law, initial condition, and interpretation:
@@ -127,11 +131,31 @@ Identify all mathematical roles:
 Distinguish the decision variable, admissible set, objective, data, and
 constraints. `The optimal parameter is given by` is too strong unless a
 solution exists and the displayed expression actually characterizes it.
+Likewise, distinguish the optimal value from an optimizer: an infimum need not
+be attained, and an `argmin` may be empty or contain several points.
+Stationarity alone does not imply optimality outside its stated hypotheses;
+KKT conclusions must retain the convexity, constraint-qualification, and other
+conditions supplied by the relevant theorem.
 
 ### Piecewise or case definition
 
 State whether the cases define an object or report a consequence. Verify that
-the cases cover the intended domain and clarify boundary overlap.
+the cases cover the intended domain and clarify boundary overlap. If a boundary
+point satisfies more than one condition, say whether the corresponding values
+agree or make the cases disjoint.
+
+### Algorithm with conditional acceptance
+
+State the initialization source before the recurrence. Preserve sequential
+dependencies when one update uses a newly computed quantity, and distinguish a
+candidate from the accepted state:
+
+> First compute \(y^{k+1}=F(x^k)\), and then form the candidate
+> \(x^{k+1}=G(y^{k+1})\). Accept the candidate if the residual test passes;
+> otherwise retain \(x^k\).
+
+Carry over supplied tolerances, counters, stopping conditions, and inexact-solve
+qualifiers. Do not invent an omitted state update or convergence guarantee.
 
 ### Equation followed by interpretation
 
@@ -142,6 +166,10 @@ Use a strength-matched interpretation:
 - an approximation `suggests` behavior only in its regime;
 - a simulation `indicates` an observed trend;
 - a theorem `establishes` its stated conclusion under its hypotheses.
+
+Keep empirical comparisons equally scoped. A lower runtime or error on a named
+dataset and finite set of runs is an observation about that setup, not a proof
+of universal superiority.
 
 ## Local variation and intentional parallelism
 
