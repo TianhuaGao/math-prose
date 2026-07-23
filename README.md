@@ -188,18 +188,20 @@ See the full
 
 The core corpus currently contains:
 
-- **50 influential anchors**: 26 research articles, 22 classic or established
-  textbooks, 1 research monograph, and 1 survey or guide;
-- **209 localized, paraphrased prose observations**;
+- **51 influential anchors**: 26 research articles, 22 classic or established
+  textbooks, 2 research monographs, and 1 survey or guide, plus 1 comparison
+  source retained for a corrected-proof boundary;
+- **231 localized, paraphrased prose observations**;
 - coverage of **all 31 mathematical behavior codes**;
 - **31 synthesized patterns**, each supported by at least three independent
   anchors and at least two core disciplines;
-- **172 reusable construction frames** across those patterns;
-- 13 anchors each in pure mathematics and optimization and numerical analysis,
-  plus 12 anchors each in applied mathematics and probability and statistics.
+- **194 reusable construction frames**, **156 misuse boundaries**, and
+  **20 evidence-linked boundary cases** across those patterns;
+- 14 anchors in optimization and numerical analysis, 13 in pure mathematics,
+  and 12 each in applied mathematics and probability and statistics.
 
 Research articles provide evidence for publication-state compression, while
-textbooks and the research monograph provide fuller evidence for definitions,
+textbooks and the research monographs provide fuller evidence for definitions,
 constructions, derivations, and proofs. The survey-and-guide anchor contributes
 reference-style definitions, validity conditions, and bounds. Sources act as
 evidence anchors, not as authors to imitate.
@@ -207,9 +209,11 @@ evidence anchors, not as authors to imitate.
 The public corpus stores bibliographic metadata, precise locators, behavior
 annotations, cue phrases, and paraphrased observations. It contains no paper or
 textbook full text and currently stores no verbatim source quotations.
-The concrete phrase inventory lives in each pattern record's `constructions` array;
-the adjacent `boundaries` explain when a frame is too strong, ambiguous, or
-mathematically inapplicable.
+The concrete phrase inventory lives in each pattern record's `constructions`
+array; the adjacent `boundaries` explain when a frame is too strong, ambiguous,
+or mathematically inapplicable. High-risk boundaries additionally carry
+counterexample, misuse, or near-synonym cases linked to observations, forward
+evaluations, or both.
 
 Explore the
 [core corpus](references/corpora/math-core.jsonl) and the
@@ -221,7 +225,8 @@ the transferable core.
 
 ## Corpus Sources
 
-The list below is the complete source registry for the current core corpus.
+The list below is the complete source registry for the current core corpus:
+51 anchors and 1 comparison source.
 Each entry links to the stable access or metadata page recorded in the corpus;
 the JSONL registry remains authoritative for editions, access constraints,
 influence evidence, and observation locators.
@@ -256,6 +261,7 @@ influence evidence, and observation locators.
 - John Duchi, Elad Hazan, Yoram Singer. [*Adaptive Subgradient Methods for Online Learning and Stochastic Optimization*](https://www.jmlr.org/papers/v12/duchi11a.html). Journal of Machine Learning Research, 2011. — `research-article`
 - Stephen Boyd, Neal Parikh, Eric Chu, Borja Peleato, Jonathan Eckstein. [*Distributed Optimization and Statistical Learning via the Alternating Direction Method of Multipliers*](https://stanford.edu/~boyd/papers/admm_distr_stats.html). Foundations and Trends in Machine Learning, 2011. — `research-article`
 - Dimitri P. Bertsekas. [*Nonlinear Programming*](https://www.athenasc.com/nonlinbook.html). Athena Scientific, 2016. — `textbook`
+- R. Tyrrell Rockafellar, Roger J-B Wets. [*Variational Analysis*](https://link.springer.com/book/10.1007/978-3-642-02431-3). Springer, 1998. — `research-monograph`
 
 ### Probability and Statistics
 
@@ -288,6 +294,10 @@ influence evidence, and observation locators.
 - John M. Lee. [*Introduction to Smooth Manifolds*](https://sites.math.washington.edu/~lee/Books/ISM/). Springer, 2013. — `textbook`
 - Sheldon Axler. [*Linear Algebra Done Right*](https://linear.axler.net/index.html). Springer, 2024. — `textbook`
 
+### Comparison Evidence
+
+- Manindra Agrawal, Neeraj Kayal, Nitin Saxena. [*Errata: PRIMES Is in P*](https://annals.math.princeton.edu/2019/189-1/p06). Annals of Mathematics, 2019. — `research-article`, `comparison`
+
 ## Repository Structure
 
 ```text
@@ -300,6 +310,8 @@ math-prose/
 │   ├── proof-and-claim-language.md  # Logical-force safeguards
 │   ├── corpus-method.md             # Evidence and annotation protocol
 │   ├── core-evaluation.md           # Forward-test record
+│   ├── core-evaluation-round5-artifacts.md
+│   │                                # Boundary-composition test artifacts
 │   └── corpora/math-core.jsonl      # Core evidence registry
 ├── scripts/validate_corpus.py       # Corpus and readiness validator
 └── tests/test_validate_corpus.py    # Validator tests
@@ -310,9 +322,10 @@ loaded only when a task needs them.
 
 ## Validation
 
-The validator uses only the Python standard library.
-It reports construction and boundary totals and rejects case- or
-whitespace-normalized duplicates within construction and boundary lists.
+The validator uses only the Python standard library. It reports construction,
+boundary, and evidence-linked boundary-case totals; validates secondary
+behaviors, semantic section roles, and appendix or supplement locations; and
+rejects case- or whitespace-normalized duplicates.
 
 Validate the corpus and its readiness gate:
 
@@ -339,7 +352,9 @@ strength, quotient construction, metric projection, asymptotic operations,
 finite-dimensional and inexact surrogates, conditional uniqueness, semigroup
 generation, missing-relation handling, terminal initialization, convergence
 modes, invariant-set limits, dependency, comparison, bounded interpretation,
-ordered updates, and local repetition. See the
+ordered updates, nested quantifiers, proof architectures, attainment,
+set-valued maps, empirical-evidence scope, corrected-proof status, and local
+repetition. See the
 [core evaluation record](references/core-evaluation.md).
 
 ## Contributing
@@ -350,7 +365,9 @@ evidence levels separate:
 1. a source record with stable bibliographic, access, genre, and influence
    evidence;
 2. a localized observation with an auditable locator and paraphrased summary;
-3. a synthesized pattern with explicit boundaries and supporting source IDs.
+3. a synthesized pattern with explicit boundaries and supporting source IDs;
+4. for high-risk distinctions, an evidence-linked counterexample, misuse, or
+   near-synonym boundary case.
 
 Please do not add full papers, textbook chapters, or long quotations. A pattern
 may be marked `validated` only when matching observations support it in at

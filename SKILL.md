@@ -85,6 +85,30 @@ not synonym rotation.
 - Do not vary terminology when the field requires one stable technical term.
 - Do not fabricate a derivation, proof, citation, theorem, or empirical result.
 
+## High-Risk Composition Checks
+
+Run the relevant checks when several mathematical actions occur in one passage:
+
+- Preserve nested quantifier order and state what each constant or witness may
+  depend on.
+- Keep convergence in distribution, in probability, almost surely, and with
+  high probability distinct. A vanishing tail bound does not by itself imply
+  almost-sure convergence.
+- Make piecewise cases exhaustive and unambiguous. In proofs, expose the base
+  case and inductive step, both directions of an equivalence, or the exact
+  contradiction rather than naming the architecture alone.
+- Distinguish an infimum from an attained minimum, stationarity from
+  optimality, weak from strong duality, and KKT conclusions from the
+  hypotheses that license them.
+- Treat inverse images, `argmin`, and general projections as set-valued when
+  existence or uniqueness is not established. Reserve orthogonal projection
+  for the appropriate linear or affine setting.
+- Keep theorem conclusions, finite empirical observations, and corrected or
+  superseded proof evidence in separate evidence modes.
+- Preserve initialization sources, sequential versus simultaneous update
+  order, acceptance branches, tolerances, and stopping conditions in algorithm
+  prose. Do not add an update or guarantee that was not supplied.
+
 ## Revision Modes
 
 ### Draft from mathematics
@@ -126,6 +150,9 @@ Run `python3 scripts/validate_corpus.py <core.jsonl> [domain.jsonl]` before
 accepting corpus changes. Keep copyrighted source text out of the public corpus
 by default. Use [references/core-evaluation.md](references/core-evaluation.md)
 as the forward-test protocol when core patterns or the writing workflow change.
+For a high-risk pattern boundary, add a validated `boundary_cases` entry with a
+counterexample, misuse, or near-synonym challenge and link it to source
+observations, forward-test evaluations, or both.
 
 ## Output
 

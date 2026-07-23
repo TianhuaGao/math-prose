@@ -97,3 +97,30 @@ formally verify every construction frame or establish universal stylistic
 coverage. The verbatim prompts, outputs, self-audits, and pre-fix failure are
 preserved in the
 [round-four artifact record](core-evaluation-round4-artifacts.md).
+
+## 2026-07-23 boundary-composition tests
+
+The fifth round targeted distinctions that are easy to preserve in isolation
+but easy to lose in longer mathematical passages. Three fresh writing runs
+received seven tasks without model answers; three different reviewers audited
+the resulting text against the mathematical contracts.
+
+| Case | Composition under test | Required boundary | Result |
+|---|---|---|---|
+| CF5-1 | Nested quantifiers, a vanishing tail bound, and three convergence modes | preserve constant dependence; infer convergence in probability only; keep distributional and almost-sure claims separate | PASS |
+| CF5-2 | Piecewise definition, induction, equivalence, and contradiction | exhaustive cases; base and step; both directions; explicit contradiction; no invented calculation | PASS |
+| CF5-3 | Infimum, stationarity, weak duality, and KKT | distinguish attainment and minimality; retain convexity and Slater hypotheses; add no existence or uniqueness | PASS |
+| CF5-4 | Set-valued inverse, `argmin`, metric projection, and subspace projection | retain empty or multivalued cases; state uniqueness hypotheses; reserve orthogonal terminology | PASS |
+| CF5-5 | Formal theorem, four-run benchmark, and publisher erratum | scope the theorem to its assumptions, the experiment to the runs, and the invalid proof step as superseded | PASS |
+| CF5-6 | Carried initialization, sequential updates, inexact solve, and accept-or-retain branch | preserve state source and update order; invent no counter update, rate, or global guarantee | PASS |
+| CF5-7 | Quotient-induced map, special-case relation, and one-instance comparison | verify representative independence; avoid false equivalence and universal superiority | PASS |
+
+All exact outputs passed independent review. Two initial audit inputs, for
+CF5-2 and CF5-5, accidentally abbreviated formulas that the writing outputs had
+preserved; those audit-input failures were marked invalid and the exact outputs
+were re-audited successfully. This correction remains visible in the
+[round-five artifact record](core-evaluation-round5-artifacts.md).
+
+The round supports the newly evidence-linked high-risk boundaries and long-chain
+composition checks. It does not establish completeness across every structure,
+subfield, or domain overlay.
